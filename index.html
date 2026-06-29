@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Findter · Subscription</title>
+<title>Findter Â· Subscription</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -29,7 +29,7 @@ html,body{font-family:var(--font);background:#f3f4f6;color:var(--txt);min-height
 .root{display:grid;grid-template-columns:1fr 288px;gap:1.25rem;align-items:start}
 @media(max-width:760px){.root{grid-template-columns:1fr}.right{order:-1}}
 
-/* ── SLIDER SECTION ── */
+/* â”€â”€ SLIDER SECTION â”€â”€ */
 .slider-section{
   background:var(--s2);border:1.5px solid var(--bdr);border-radius:14px;
   padding:1.25rem 1.5rem 1.4rem;margin-bottom:1.25rem
@@ -64,7 +64,7 @@ input[type=range]::-moz-range-thumb{
   position:absolute;height:6px;left:0;
   /* vertically centred on the thumb: thumb is 22px, track is 6px,
      so top = (22-6)/2 = 8px below the slider-wrap padding-top of 36px
-     total offset from slider-wrap top = 36 + 8 = 44 → but we just
+     total offset from slider-wrap top = 36 + 8 = 44 â†’ but we just
      align to the <input> which sits at padding-top:36px */
   top:calc(36px + 8px); /* 36px padding-top + (22-6)/2 = 8px */
   border-radius:999px;background:var(--teal);
@@ -99,8 +99,10 @@ input[type=range]::-moz-range-thumb{
 /* plan hint text */
 .plan-hint{text-align:center;margin-top:.6rem;font-size:12px;color:var(--muted)}
 .plan-hint strong{color:var(--teal-dk);font-weight:600}
+.plan-badge-lbl{text-align:center;margin-top:5px;min-height:22px}
+.plan-badge-pill{display:inline-block;background:#dcfce7;color:#166534;border:1px solid #86efac;border-radius:999px;padding:2px 13px;font-size:11px;font-weight:600;letter-spacing:.01em}
 
-/* ── DUAL PLAN CARDS ── */
+/* â”€â”€ DUAL PLAN CARDS â”€â”€ */
 .dual-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.25rem}
 @media(max-width:520px){.dual-cards{grid-template-columns:1fr}}
 
@@ -117,14 +119,19 @@ input[type=range]::-moz-range-thumb{
   background:linear-gradient(160deg,#f0fdf9 0%,#ffffff 60%);
 }
 
-/* annual badge ribbon top-right */
-.annual-ribbon{
-  position:absolute;top:-1px;right:12px;
-  background:var(--teal);color:#fff;
-  font-size:9px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
-  padding:3px 8px;border-radius:0 0 6px 6px;
-  pointer-events:none;
+/* annual star badge â€” top-right corner */
+.ann-badge{
+  position:absolute;top:-35px;right:-20px;
+  width:52px;height:52px;
+  background:linear-gradient(145deg,#fbbf24,#d97706);
+  color:#fff;
+  border-radius:50%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:1px;pointer-events:none;z-index:5;
+  box-shadow:0 2px 10px rgba(217,119,6,.4);
 }
+.ann-badge i{font-size:13px;line-height:1}
+.ann-badge span{font-size:8px;font-weight:800;letter-spacing:.02em;line-height:1.2;text-align:center}
 /* monthly label */
 .monthly-chip{
   display:inline-block;font-size:9px;font-weight:600;text-transform:uppercase;
@@ -152,11 +159,13 @@ input[type=range]::-moz-range-thumb{
 .pc-price-save{font-size:9px;font-weight:600;color:var(--teal-dk);margin-top:1px}
 
 .pc-limit{
-  display:inline-flex;align-items:center;gap:4px;
-  font-size:10px;color:var(--muted);
-  background:var(--s1);border:1px solid var(--bdr);
-  border-radius:999px;padding:2px 8px;margin-bottom:.6rem
+  display:flex;align-items:center;gap:7px;
+  font-size:12.5px;font-weight:700;color:var(--teal-dk);
+  background:var(--teal-lt);border:1px solid #a7f3d0;
+  border-radius:var(--r);padding:7px 12px;margin-bottom:.75rem;
+  width:100%;box-sizing:border-box;
 }
+.pc-limit i{font-size:15px;flex-shrink:0}
 .pc-desc{font-size:11.5px;color:var(--txt2);line-height:1.45;margin-bottom:.75rem}
 .pc-features{list-style:none;margin-top:auto}
 .pc-features li{
@@ -181,7 +190,7 @@ input[type=range]::-moz-range-thumb{
 }
 .quote-cta:hover{background:#fdf4ff}
 
-/* ── ADDON SECTION ── */
+/* â”€â”€ ADDON SECTION â”€â”€ */
 .addon-section{border:1.5px solid var(--bdr);border-radius:12px;overflow:hidden;background:var(--s2)}
 .addon-head{padding:11px 16px;background:var(--s1);border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;gap:12px}
 .addon-head-left{display:flex;align-items:center;gap:10px}
@@ -231,7 +240,7 @@ input[type=range]::-moz-range-thumb{
 .fi-cad{font-size:11px;color:var(--muted)}
 .in-plan-tag{font-size:10px;padding:2px 7px;border-radius:999px;background:var(--teal-lt);color:var(--teal-dk);font-weight:500;display:inline-block}
 
-/* ── SUMMARY CARD ── */
+/* â”€â”€ SUMMARY CARD â”€â”€ */
 .sum-card{border:1px solid var(--bdr);border-radius:12px;background:var(--s2);overflow:hidden;position:sticky;top:1.5rem}
 .sum-head{padding:13px 15px;border-bottom:1px solid var(--bdr);background:var(--s1)}
 .sum-head-title{font-size:14px;font-weight:600;color:var(--txt)}
@@ -258,7 +267,7 @@ input[type=range]::-moz-range-thumb{
 .sum-total-val{font-size:20px;font-weight:600;color:var(--txt)}
 .sum-total-val span{font-size:12px;font-weight:400;color:var(--muted)}
 .sub-btn{margin-top:11px;width:100%;padding:10px;font-size:14px;font-weight:500;border-radius:var(--r);border:none;background:var(--teal);color:#fff;cursor:pointer;font-family:var(--font);transition:background .15s}
-.sub-btn:hover{background:var(--teal-dk)}
+.sub-btn:hover:not(.free-state):not(.sub-btn-downgrade){background:var(--teal-dk)}
 .sub-btn.free-state{background:var(--s1);color:var(--muted);border:1px solid var(--bdr);cursor:default}
 .sub-btn.quote-state{background:#7c3aed;color:#fff}
 .sub-btn.quote-state:hover{background:#6d28d9}
@@ -270,33 +279,89 @@ input[type=range]::-moz-range-thumb{
 .lim-meta span{font-size:10px;color:var(--muted)}
 .lim-meta strong{font-size:10px;font-weight:600;color:var(--teal-dk)}
 
-/* ── CURRENT PLAN BANNER ── */
+/* â”€â”€ CURRENT PLAN BANNER â”€â”€ */
 .cur-banner{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 16px;border:1.5px solid var(--teal);border-radius:12px;background:var(--teal-pl);margin-bottom:1.25rem}
 .cur-banner-left{display:flex;align-items:center;gap:10px}
 .cur-banner-left>i{font-size:20px;color:var(--teal);flex-shrink:0}
 .cur-banner-plan{font-size:13px;color:var(--txt);line-height:1.3}
 .cur-banner-sub{font-size:11px;color:var(--muted);margin-top:1px}
+.cur-banner-expiry{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--muted);margin-top:3px}
+.cur-banner-expiry i{font-size:12px;flex-shrink:0}
 .cur-banner-badge{font-size:10px;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--teal);color:#fff;flex-shrink:0}
 
-/* ── DETECT PRODUCTS ── */
+/* â”€â”€ DETECT PRODUCTS â”€â”€ */
 .detect-wrap{margin-top:.8rem;padding-top:.75rem;border-top:1px solid var(--bdr);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .detect-btn{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;font-size:12px;font-weight:500;border-radius:var(--r);border:1.5px solid var(--bdr2);background:var(--s1);cursor:pointer;color:var(--txt2);font-family:var(--font);transition:all .15s}
 .detect-btn:hover{background:var(--bdr);border-color:var(--txt2)}
 .detect-result{font-size:12px;color:var(--teal-dk);font-weight:500}
 
-/* ── TRIAL RIBBON ── */
+/* â”€â”€ STORE MARKER â”€â”€ */
+.store-tick{position:absolute;top:calc(36px - 5px);width:2.5px;height:28px;background:#f59e0b;border-radius:2px;pointer-events:none;z-index:6;transform:translateX(-50%);display:none}
+.store-lbl-row{position:relative;height:16px;margin-top:5px}
+.store-tick-lbl{position:absolute;top:0;font-size:9px;font-weight:700;color:#b45309;white-space:nowrap;pointer-events:none;z-index:6;transform:translateX(-50%)}
+
+/* 200K+ label: right-aligned so it doesn't collide with 200K */
+.milestones .ms-dot:last-child{transform:translateX(-80%)}
+
+/* â”€â”€ TOTAL BREAKDOWN â”€â”€ */
+.total-toggle{background:none;border:none;cursor:pointer;padding:0 3px;color:var(--muted);font-family:var(--font);vertical-align:middle;line-height:1}
+.total-toggle i{display:inline-block;font-size:13px;transition:transform .2s}
+.total-toggle.open i{transform:rotate(180deg)}
+.total-breakdown{background:var(--s1);border:1px solid var(--bdr);border-radius:var(--r);padding:9px 11px;margin-top:6px;font-size:11.5px}
+.bd-line{display:flex;justify-content:space-between;align-items:baseline;padding:2.5px 0;color:var(--txt2)}
+.bd-line>span:last-child{font-weight:500;color:var(--txt);flex-shrink:0}
+.bd-divider{height:1px;background:var(--bdr2);margin:6px 0}
+.bd-original>span:first-child{color:var(--muted)}
+.bd-original>span:last-child{text-decoration:line-through;color:var(--muted);font-weight:400}
+.bd-discount>span:first-child{color:var(--teal-dk);font-weight:600}
+.bd-discount>span:last-child{color:var(--teal-dk);font-weight:700}
+
+/* â”€â”€ TRIAL RIBBON â”€â”€ */
 .trial-ribbon{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;color:var(--teal-dk);background:var(--teal-lt);border:1px solid #99f6e4;border-radius:999px;padding:3px 8px;margin-bottom:8px}
 
-/* ── CARD SELECTION ── */
-.plan-card{cursor:pointer}
-.plan-card.is-selected{outline:2.5px solid var(--teal);outline-offset:2px}
-.card-sel-tick{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;color:var(--teal-dk);background:var(--teal-lt);border-radius:999px;padding:2px 8px;margin-bottom:8px}
+/* â”€â”€ BILLING TOGGLE â”€â”€ */
+.billing-toggle-wrap{display:flex;justify-content:center;margin-bottom:14px}
+.billing-toggle-inner{display:flex;border:1.5px solid var(--bdr);border-radius:999px;overflow:hidden;background:var(--s2)}
+.billing-tab{padding:7px 22px;font-size:12.5px;font-weight:600;border:none;background:transparent;cursor:pointer;font-family:var(--font);color:var(--txt2);transition:background .15s,color .15s;white-space:nowrap}
+.billing-tab.active{background:var(--teal);color:#fff}
+.save-chip{background:#dcfce7;color:#166534;border-radius:999px;padding:1px 6px;font-size:9.5px;font-weight:700;margin-left:5px}
+.billing-tab.active .save-chip{background:rgba(255,255,255,.25);color:#fff}
 
-/* ── NO-TRIAL NOTICE ── */
+/* â”€â”€ CARD ROLE CHIPS â”€â”€ */
+.card-role-chip{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;border-radius:999px;padding:2px 9px;margin-bottom:8px}
+.current-chip{background:var(--s1);border:1px solid var(--bdr2);color:var(--txt2)}
+.upgrade-chip{background:var(--teal-lt);border:1px solid #99f6e4;color:var(--teal-dk)}
+.downgrade-chip{background:#fff7ed;border:1px solid #fed7aa;color:#c2410c}
+.same-chip{background:var(--s1);border:1px solid var(--bdr);color:var(--muted)}
+
+/* â”€â”€ CURRENT PLAN CARD â”€â”€ */
+.plan-card.current-plan-card{border-color:var(--bdr2);background:var(--s1)}
+
+/* â”€â”€ CARD ACTION BUTTON â”€â”€ */
+.card-cta{width:100%;margin-top:.9rem;padding:9px;font-size:12.5px;font-weight:600;border-radius:var(--r);cursor:pointer;font-family:var(--font);display:flex;align-items:center;justify-content:center;gap:6px;border:1.5px solid transparent;transition:all .15s}
+.card-cta.upgrade{background:var(--teal);color:#fff;border-color:var(--teal)}
+.card-cta.upgrade:hover{background:var(--teal-dk);border-color:var(--teal-dk)}
+.card-cta.downgrade{background:#fff7ed;color:#c2410c;border-color:#fed7aa}
+.card-cta.downgrade:hover{background:#ffedd5}
+.card-cta.noop{background:var(--s1);color:var(--muted);border-color:var(--bdr);cursor:default}
+.card-cta.switch-billing{background:var(--s2);color:var(--teal-dk);border-color:#99f6e4}
+.card-cta.switch-billing:hover{background:var(--teal-lt)}
+
+/* â”€â”€ SUMMARY DOWNGRADE BUTTON â”€â”€ */
+.sub-btn.sub-btn-downgrade{background:#fff7ed;color:#c2410c;border:1.5px solid #fed7aa}
+.sub-btn.sub-btn-downgrade:hover{background:#ffedd5}
+
+/* â”€â”€ TOAST â”€â”€ */
+.plan-toast{position:fixed;bottom:24px;right:24px;padding:11px 18px;border-radius:10px;font-size:13px;font-weight:500;font-family:var(--font);box-shadow:0 4px 20px rgba(0,0,0,.13);z-index:9999;display:flex;align-items:center;gap:8px;animation:toastIn .22s ease}
+.plan-toast.ok{background:#dcfce7;color:#166534;border:1px solid #86efac}
+.plan-toast.info{background:#fff7ed;color:#c2410c;border:1px solid #fed7aa}
+@keyframes toastIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* â”€â”€ NO-TRIAL NOTICE â”€â”€ */
 .no-trial-note{padding:8px 16px;font-size:11px;color:var(--amb-txt);background:var(--amb);border-top:1px solid var(--amb-bdr);display:flex;align-items:flex-start;gap:6px;line-height:1.5}
 .no-trial-note>i{font-size:13px;flex-shrink:0;margin-top:1px}
 
-/* ── DISCOUNT CODE ── */
+/* â”€â”€ DISCOUNT CODE â”€â”€ */
 .discount-wrap{margin-top:10px;padding-top:10px;border-top:1px solid var(--bdr)}
 .discount-row{display:flex;gap:6px;margin-top:6px}
 .discount-input{flex:1;padding:7px 10px;font-size:12px;border:1.5px solid var(--bdr2);border-radius:var(--r);outline:none;font-family:var(--font);color:var(--txt);background:var(--s2);transition:border-color .15s}
@@ -308,12 +373,12 @@ input[type=range]::-moz-range-thumb{
 .discount-msg.ok{color:var(--teal-dk);font-weight:500}
 .discount-msg.err{color:#dc2626}
 
-/* ── DOWNGRADE ── */
+/* â”€â”€ DOWNGRADE â”€â”€ */
 .downgrade-row{text-align:center;margin-top:7px}
 .downgrade-lnk{font-size:11px;color:var(--muted);background:none;border:none;cursor:pointer;font-family:var(--font);text-decoration:underline;padding:0}
 .downgrade-lnk:hover{color:var(--txt2)}
 
-/* ── FAQ SECTION ── */
+/* â”€â”€ FAQ SECTION â”€â”€ */
 .faq-section{margin-top:1.25rem;border:1.5px solid var(--bdr);border-radius:12px;background:var(--s2);overflow:hidden}
 .faq-head{padding:11px 16px;background:var(--s1);border-bottom:1px solid var(--bdr);display:flex;align-items:center;gap:10px}
 .faq-head>i{font-size:17px;color:var(--txt2);flex-shrink:0}
@@ -341,13 +406,17 @@ input[type=range]::-moz-range-thumb{
       <i class="ti ti-circle-check-filled"></i>
       <div>
         <div class="cur-banner-plan">You are currently on the <strong id="cb-plan-name">Free plan</strong></div>
+        <div class="cur-banner-expiry" id="cb-plan-expiry" style="display:none">
+          <i class="ti ti-calendar-event"></i>
+          <span id="cb-expiry-txt"></span>
+        </div>
       </div>
     </div>
     <span class="cur-banner-badge">Active</span>
   </div>
 
   <div class="root">
-    <!-- ══ LEFT ══ -->
+    <!-- â•â• LEFT â•â• -->
     <div class="left">
 
       <!-- SLIDER SECTION -->
@@ -357,6 +426,7 @@ input[type=range]::-moz-range-thumb{
         <div class="slider-wrap" id="slider-wrap">
           <div class="track-fill" id="track-fill" style="width:0%"></div>
           <div class="count-pill" id="count-pill" style="left:0%">0 products</div>
+          <div class="store-tick" id="store-tick"></div>
           <input type="range" id="prod-slider" min="0" max="100" value="0" step="1"
                  oninput="onSlide(this.value)"/>
         </div>
@@ -364,8 +434,14 @@ input[type=range]::-moz-range-thumb{
         <!-- milestone dots -->
         <div class="milestones" id="milestones"></div>
 
+        <!-- store marker label (below milestones) -->
+        <div class="store-lbl-row" id="store-lbl-row" style="display:none">
+          <span class="store-tick-lbl" id="store-tick-lbl">Your store</span>
+        </div>
+
         <!-- hint -->
         <div class="plan-hint" id="plan-hint">Slide to see the right plan for your store</div>
+        <div class="plan-badge-lbl" id="plan-badge-lbl"></div>
 
         <!-- auto-detect -->
         <div class="detect-wrap">
@@ -373,6 +449,14 @@ input[type=range]::-moz-range-thumb{
             <i class="ti ti-refresh"></i> Auto-detect my product count
           </button>
           <span class="detect-result" id="detect-result" style="display:none"></span>
+        </div>
+      </div>
+
+      <!-- BILLING TOGGLE -->
+      <div class="billing-toggle-wrap">
+        <div class="billing-toggle-inner">
+          <button class="billing-tab active" id="bill-monthly" onclick="selectBilling('monthly')">Monthly</button>
+          <button class="billing-tab" id="bill-annual" onclick="selectBilling('annual')">Annually<span class="save-chip">Save 17%</span></button>
         </div>
       </div>
 
@@ -387,17 +471,11 @@ input[type=range]::-moz-range-thumb{
           <div class="addon-head-left">
             <i class="ti ti-adjustments-horizontal"></i>
             <div>
-              <div class="addon-title">Custom add-ons</div>
-              <div class="addon-sub">Toggle individual features on top of your plan</div>
+              <div class="addon-title">Advanced Features add-ons</div>
             </div>
           </div>
-          <button class="build-btn" id="build-btn" onclick="toggleCustomMode()">Build your own</button>
         </div>
         <div id="feat-list"></div>
-        <div class="no-trial-note">
-          <i class="ti ti-info-circle"></i>
-          <span>Individual add-ons do not include a trial period - they are billed immediately from the day you enable them. We recommend reviewing each feature on the <strong>Advanced Features</strong> page before purchasing.</span>
-        </div>
       </div>
 
       <!-- FAQ SECTION -->
@@ -434,22 +512,13 @@ input[type=range]::-moz-range-thumb{
 
     </div><!-- /.left -->
 
-    <!-- ══ RIGHT ══ -->
+    <!-- â•â• RIGHT â•â• -->
     <div class="right">
       <div class="sum-card">
-        <div class="sum-head"><div class="sum-head-title">Your plan summary</div></div>
+        <div class="sum-head"><div class="sum-head-title" id="sum-head-title">Order summary</div></div>
         <div class="sum-body">
 
-          <div class="sum-lbl">Current plan</div>
-          <div class="sum-cur-block">
-            <div class="sum-cur-name" id="s-cur-name">Free</div>
-          </div>
-
-          <div class="sum-lbl">Current active features</div>
-          <div id="s-active-feats"></div>
-
           <div id="s-upgrade-sec" style="display:none">
-            <div class="sum-div"></div>
             <div class="sum-lbl">Upgrading to</div>
             <div class="sum-up-row">
               <span class="sum-up-name" id="s-up-name">-</span>
@@ -472,20 +541,21 @@ input[type=range]::-moz-range-thumb{
           <div class="discount-wrap" id="discount-wrap" style="display:none">
             <div class="sum-lbl">Discount code</div>
             <div class="discount-row">
-              <input class="discount-input" id="discount-input" type="text" placeholder="Enter code…" />
+              <input class="discount-input" id="discount-input" type="number" min="1" max="100" placeholder="1â€“100 %" />
               <button class="discount-apply" onclick="applyDiscount()">Apply</button>
             </div>
             <div class="discount-msg" id="discount-msg"></div>
           </div>
 
           <div class="sum-total-row" id="s-total-row" style="display:none">
-            <span class="sum-total-lbl">Total</span>
+            <span class="sum-total-lbl">Total <button class="total-toggle" id="total-toggle" onclick="toggleBreakdown()"><i class="ti ti-chevron-down"></i></button></span>
             <span class="sum-total-val" id="s-total">$0<span>/mo</span></span>
           </div>
+          <div class="total-breakdown" id="total-breakdown" style="display:none"></div>
 
           <button class="sub-btn free-state" id="s-sub-btn">You're on the Free plan</button>
           <div class="downgrade-row" id="downgrade-row" style="display:none">
-            <button class="downgrade-lnk" onclick="downgradeToFree()">Cancel plan · downgrade to Free</button>
+            <button class="downgrade-lnk" onclick="downgradeToFree()">Cancel plan Â· downgrade to Free</button>
           </div>
 
           <div class="lim-bar">
@@ -502,21 +572,21 @@ input[type=range]::-moz-range-thumb{
 </div><!-- /.wrap -->
 
 <script>
-/* ══════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    DATA
-══════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 /*
-  SLIDER SCALE: 101 steps (0–100) mapped to product counts.
+  SLIDER SCALE: 101 steps (0â€“100) mapped to product counts.
   Plan boundaries are defined by PRODUCT COUNT, not slider position.
   The slider position is only for display; planForCount() drives logic.
 
   Plan count thresholds (inclusive lower, exclusive upper):
-    Free:        0 – 300
-    Starter:     301 – 3000
-    Growth:      3001 – 50000
-    Pro:         50001 – 100000
-    Enterprise:  100001 – 200000
+    Free:        0 â€“ 300
+    Starter:     301 â€“ 3000
+    Growth:      3001 â€“ 50000
+    Pro:         50001 â€“ 100000
+    Enterprise:  100001 â€“ 200000
     Quote:       200001+
 */
 const PLAN_COUNT_RANGES = {
@@ -529,22 +599,22 @@ const PLAN_COUNT_RANGES = {
 };
 
 /*
-  Slider positions 0–100 mapped to product counts via interpolation.
+  Slider positions 0â€“100 mapped to product counts via interpolation.
   Key anchor points placed so the slider feels natural across 6 orders of magnitude.
 */
 const ANCHORS = [
   { pos:  0, count:      0 },
   { pos:  8, count:    100 },
-  { pos: 16, count:    300 },   // → Starter threshold
+  { pos: 16, count:    300 },   // â†’ Starter threshold
   { pos: 24, count:   1000 },
-  { pos: 32, count:   3000 },   // → Growth threshold
+  { pos: 32, count:   3000 },   // â†’ Growth threshold
   { pos: 44, count:  10000 },
   { pos: 56, count:  30000 },
-  { pos: 64, count:  50000 },   // → Pro threshold
+  { pos: 64, count:  50000 },   // â†’ Pro threshold
   { pos: 72, count:  75000 },
-  { pos: 80, count: 100000 },   // → Enterprise threshold
+  { pos: 80, count: 100000 },   // â†’ Enterprise threshold
   { pos: 88, count: 150000 },
-  { pos: 96, count: 200000 },   // → Quote threshold
+  { pos: 96, count: 200000 },   // â†’ Quote threshold
   { pos:100, count: 250000 },
 ];
 
@@ -602,51 +672,47 @@ const PLAN_INCLUDES = {
 };
 
 const ADDON_PRICES = {
-  metafield:2.99,swatch:3.99,count:2.99,sorting:4.99,
-  variant:4.99,currency:3.99,advvariant:6.99,quicktime:4.99,
-  multisrc:4.99,colsearch:4.99,ormode:2.99,mktpub:3.99,
+  ymm:9.99,
+  aiSearch:14.99,
+  synonyms:4.99,
+  b2bFilter:7.99,
 };
 
 const ADDON_LABELS = {
   basicsearch:'Basic search',filters3:'Up to 3 filters',
-  metafield:'Metafield indexing',swatch:'Swatch images',count:'Filter count values',
-  sorting:'Storefront sorting',variant:'Variant filter',currency:'Market currency',
-  advvariant:'Advanced variant filter',quicktime:'Quick-time indexing',
-  multisrc:'Multi-source filter',colsearch:'Collection search',
-  ormode:'OR-mode multi-filter',mktpub:'Market publish filter',
+  ymm:'Year Make Model Search',
+  aiSearch:'AI Semantic Search',
+  synonyms:'Synonyms Search',
+  b2bFilter:'Dependant Filter (B2B Tools)',
 };
 
 const FEAT_DESC = {
   basicsearch:'Standard keyword search across your store',
   filters3:'Filter panel with up to 3 active filter groups',
-  metafield:'Index product metafields for filtering',
-  swatch:'Visual color / image swatches in filter panel',
-  count:'Show product count next to each filter option',
-  sorting:'Custom sort rules on collection pages',
-  variant:'Filter by size, color, and other variant options',
-  currency:'Show prices in local currency per Shopify Markets',
-  advvariant:'Filter by availability and combined variant attributes',
-  quicktime:'Faster catalog sync for large or frequently-updated stores',
-  multisrc:'Combine filters from metafields, tags, and variants',
-  colsearch:'Search within collection pages',
-  ormode:'Show results matching any (not all) filter selections',
-  mktpub:"Filter products by which Shopify Markets they're published to",
+  ymm:'Let shoppers find parts by vehicle year, make, and model',
+  aiSearch:'Natural language search powered by AI for smarter, intent-based results',
+  synonyms:'Map alternate words and phrases to the same search results',
+  b2bFilter:'Show or hide filters based on customer tags or B2B conditions',
 };
 
-/* ══════════════════════════════════════════
-   STATE
-══════════════════════════════════════════ */
-const USER_PLAN = 'free';
-let selPlan     = 'free';
-let customMode  = false;
-let addons      = {};
-let sliderPos   = 0;
-let billingMode = 'monthly'; // 'monthly' | 'annual'
+const PLAN_ORDER = ['free','starter','growth','pro','enterprise','quote'];
 
-/* ══════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   STATE
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+let USER_PLAN        = 'free';
+let USER_BILLING     = 'monthly'; // what billing period the user is actually on
+let planExpiresDate  = null;      // Date when current paid plan expires, null = no expiry (free)
+let selPlan          = 'free';
+let addons       = {};
+let sliderPos    = 0;
+let billingMode  = 'monthly'; // display toggle: 'monthly' | 'annual'
+let discountPct  = 0;         // 0â€“100
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    HELPERS
-══════════════════════════════════════════ */
-// Convert slider position → product count via linear interpolation between ANCHORS
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+// Convert slider position â†’ product count via linear interpolation between ANCHORS
 function countForPos(pos){
   for(let i=0;i<ANCHORS.length-1;i++){
     const a=ANCHORS[i], b=ANCHORS[i+1];
@@ -658,7 +724,7 @@ function countForPos(pos){
   return ANCHORS[ANCHORS.length-1].count;
 }
 
-// Convert product count → plan key using count thresholds
+// Convert product count â†’ plan key using count thresholds
 function planForCount(count){
   for(const [key,[lo,hi]] of Object.entries(PLAN_COUNT_RANGES)){
     if(count>=lo && count<=hi) return key;
@@ -673,9 +739,9 @@ function fmtCount(n){
   return n.toLocaleString();
 }
 
-/* ══════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    BUILD STATIC UI ELEMENTS
-══════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function buildMilestones(){
   const wrap = document.getElementById('milestones');
   wrap.innerHTML='';
@@ -691,11 +757,7 @@ function buildMilestones(){
 function buildFeatureList(){
   const list=document.getElementById('feat-list');
   const rows=[
-    {key:'basicsearch',locked:true},{key:'filters3',locked:true},
-    {key:'metafield'},{key:'swatch'},{key:'count'},
-    {key:'sorting'},{key:'variant'},{key:'currency'},
-    {key:'advvariant'},{key:'quicktime'},
-    {key:'multisrc'},{key:'colsearch'},{key:'ormode'},{key:'mktpub'},
+    {key:'ymm'},{key:'aiSearch'},{key:'synonyms'},{key:'b2bFilter'},
   ];
   list.innerHTML=rows.map(r=>`
     <div class="feat-row ${r.locked?'locked':''}" id="fr-${r.key}"
@@ -710,9 +772,9 @@ function buildFeatureList(){
     </div>`).join('');
 }
 
-/* ══════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    SLIDER
-══════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function onSlide(val){
   sliderPos = parseInt(val);
   const count   = countForPos(sliderPos);
@@ -733,9 +795,11 @@ function onSlide(val){
     if(el) el.classList.toggle('lit', sliderPos>=m.pos);
   });
 
-  // hint
+  // hint + badge label
   document.getElementById('plan-hint').innerHTML =
-    `Recommended plan: <strong>${PLANS[newPlan].name}</strong> &nbsp;·&nbsp; ${fmtCount(count)} products`;
+    `Recommended plan: <strong>${PLANS[newPlan].name}</strong> &nbsp;Â·&nbsp; ${fmtCount(count)} products`;
+  const pbh=document.getElementById('plan-badge-lbl');
+  if(pbh) pbh.innerHTML=PLANS[newPlan].badgeTxt?`<span class="plan-badge-pill">${PLANS[newPlan].badgeTxt}</span>`:'&nbsp;';
 
   // plan switch
   if(newPlan!==selPlan){
@@ -747,20 +811,32 @@ function onSlide(val){
   renderSummary();
 }
 
-/* ══════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    DUAL PLAN CARDS
-══════════════════════════════════════════ */
-function cardHTML(planKey, mode /* 'monthly'|'annual' */){
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+// cardType: 'current' (left â€” always USER_PLAN) | 'selected' (right â€” slider-chosen plan)
+function cardHTML(planKey, cardType){
   const p=PLANS[planKey];
-  const isAnn=(mode==='annual');
   const isQuote=(planKey==='quote');
   const isFree=(p.price===0);
-  const isSelected=(billingMode===mode);
+  const isCurrent=(cardType==='current');
+  const isAnn=(billingMode==='annual')&&!isFree; // free plan is never affected by billing toggle
 
-  const badgeHTML = p.badgeTxt
-    ? `<span class="pc-badge ${p.badge}">${p.badgeTxt}</span>` : '';
+  // Role chip â€” only on left (current) card
+  const roleChip = isCurrent
+    ? `<div class="card-role-chip current-chip"><i class="ti ti-user-check"></i> Current plan</div>`
+    : '';
 
-  // price block
+  // Annual star badge â€” top-right corner, right card only, paid plan, annual mode
+  const annBadge=(!isCurrent&&isAnn&&!isQuote)
+    ?`<div class="ann-badge"></i><span>17%<br>OFF</span></div>`:'';
+  const annRibbon=annBadge; // alias so template references below work unchanged
+
+  // Trial ribbon on right card when paid and different from current plan
+  const trialRibbon=(!isCurrent&&!isFree&&!isQuote&&planKey!==USER_PLAN)
+    ?`<div class="trial-ribbon"><i class="ti ti-clock"></i> 14-day free trial included</div>`:'';
+
+  // Price block
   let priceHTML='';
   if(isQuote){
     priceHTML=`<div class="pc-price-main" style="font-size:17px;color:#86198f">Let's talk</div>`;
@@ -770,7 +846,7 @@ function cardHTML(planKey, mode /* 'monthly'|'annual' */){
     priceHTML=`
       <div class="pc-price-main">$${p.annPx.toFixed(2)}<sub>/mo</sub></div>
       <div class="pc-price-was">$${p.price.toFixed(2)}/mo</div>
-      <div class="pc-price-save">Billed annually · save 17%</div>`;
+      <div class="pc-price-save">Billed annually Â· save 17%</div>`;
   } else {
     priceHTML=`<div class="pc-price-main">$${p.price.toFixed(2)}<sub>/mo</sub></div>`;
   }
@@ -781,40 +857,69 @@ function cardHTML(planKey, mode /* 'monthly'|'annual' */){
     ...feats.exc.map(f=>`<li><i class="ti ti-x fi-no"></i><span class="fi-no-txt">${f}</span></li>`),
   ].join('');
 
+  const extraClass=isCurrent?' current-plan-card'
+    :(!isFree&&!isQuote&&isAnn)?' annual-card':'';
+
+  let ctaBtn='';
+  if(isCurrent){
+    // Left card: "Switch to Annual/Monthly" only when the toggle differs from the user's active billing
+    const hasBilling=(p.price!==0&&p.price!==null);
+    if(hasBilling && billingMode!==USER_BILLING){
+      const toLabel=billingMode==='annual'?'Annual':'Monthly';
+      ctaBtn=`<button class="card-cta switch-billing" onclick="switchBilling()"><i class="ti ti-arrows-exchange"></i> Switch to ${toLabel} plan</button>`;
+    }
+  } else {
+    // Right card: upgrade / downgrade / no-change / quote
+    const curIdx=PLAN_ORDER.indexOf(USER_PLAN);
+    const selIdx=PLAN_ORDER.indexOf(planKey);
+    if(isQuote){
+      ctaBtn=`<button class="card-cta upgrade" onclick="applyPlanChange()"><i class="ti ti-mail"></i> Contact us for a quote</button>`;
+    } else if(selIdx===curIdx){
+      ctaBtn=`<button class="card-cta noop" disabled><i class="ti ti-check"></i> Current plan</button>`;
+    } else if(selIdx>curIdx){
+      ctaBtn=`<button class="card-cta upgrade" onclick="applyPlanChange()"><i class="ti ti-arrow-up-right"></i> Upgrade to ${p.name}</button>`;
+    } else {
+      ctaBtn=`<button class="card-cta downgrade" onclick="applyPlanChange()"><i class="ti ti-arrow-down-right"></i> Downgrade to ${p.name}</button>`;
+    }
+  }
+
   if(isQuote){
     return `
-      <div class="plan-card ${isAnn?'annual-card quote-card':'monthly-card quote-card'}${isSelected?' is-selected':''}" onclick="selectBilling('${mode}')">
-        ${isSelected?'<div class="card-sel-tick"><i class="ti ti-check"></i> Selected</div>':''}
-        ${isAnn?'<div class="annual-ribbon">Annual</div>':'<div class="monthly-chip">Monthly</div>'}
+      <div class="plan-card quote-card${extraClass}">
+        ${annRibbon}${roleChip}
         <div class="pc-head">
-          <div class="pc-name-row"><span class="pc-name">${p.name}</span>${badgeHTML}</div>
+          <div class="pc-name-row"><span class="pc-name">${p.name}</span></div>
           <div class="pc-price-block">${priceHTML}</div>
         </div>
         <div><span class="pc-limit"><i class="ti ti-package"></i> More than 200,000 products</span></div>
         <div class="pc-desc">${PLAN_DESC[planKey]}</div>
         <ul class="pc-features">${featHTML}</ul>
-        <button class="quote-cta"><i class="ti ti-mail"></i> Contact us for a quote</button>
+        ${ctaBtn}
       </div>`;
   }
 
   return `
-    <div class="plan-card ${isAnn?'annual-card':'monthly-card'}${isSelected?' is-selected':''}" onclick="selectBilling('${mode}')">
-      ${isAnn?'<div class="annual-ribbon">Annual · Save 17%</div>':'<div class="monthly-chip">Monthly</div>'}
-      ${isSelected?'<div class="card-sel-tick"><i class="ti ti-check"></i> Selected</div>':''}
-      ${!isFree?'<div class="trial-ribbon"><i class="ti ti-clock"></i> 14-day free trial included</div>':''}
+    <div class="plan-card${extraClass}">
+      ${annRibbon}${roleChip}${trialRibbon}
       <div class="pc-head">
-        <div class="pc-name-row"><span class="pc-name">${p.name}</span>${badgeHTML}</div>
+        <div class="pc-name-row"><span class="pc-name">${p.name}</span></div>
         <div class="pc-price-block">${priceHTML}</div>
       </div>
       <div><span class="pc-limit"><i class="ti ti-package"></i> Up to ${p.limitLabel} products</span></div>
       <div class="pc-desc">${PLAN_DESC[planKey]}</div>
       <ul class="pc-features">${featHTML}</ul>
+      ${ctaBtn}
     </div>`;
 }
 
 function renderDualCards(){
-  document.getElementById('dual-cards').innerHTML =
-    cardHTML(selPlan,'monthly') + cardHTML(selPlan,'annual');
+  document.getElementById('dual-cards').innerHTML=
+    cardHTML(USER_PLAN,'current') + cardHTML(selPlan,'selected');
+  // sync toggle button active state
+  const btnM=document.getElementById('bill-monthly');
+  const btnA=document.getElementById('bill-annual');
+  if(btnM) btnM.classList.toggle('active',billingMode==='monthly');
+  if(btnA) btnA.classList.toggle('active',billingMode==='annual');
 }
 
 function selectBilling(mode){
@@ -823,39 +928,11 @@ function selectBilling(mode){
   renderSummary();
 }
 
-/* ══════════════════════════════════════════
-   CUSTOM MODE
-══════════════════════════════════════════ */
-function toggleCustomMode(){
-  customMode=!customMode;
-  addons={};
-  const btn=document.getElementById('build-btn');
-  btn.classList.toggle('active',customMode);
-  btn.textContent=customMode?'← Choose a plan instead':'Build your own';
-  renderFeatureRows();
-  renderSummary();
-}
-
-/* ══════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    FEATURE ROWS
-══════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function renderFeatureRows(){
-  const baseKey  = customMode ? USER_PLAN : selPlan;
-  const included = PLAN_INCLUDES[baseKey]||[];
-  const planName = PLANS[baseKey].name;
-
-  ['basicsearch','filters3'].forEach(k=>{
-    const tog=document.getElementById('tog-'+k);
-    const fn=document.getElementById('fn-'+k);
-    const fr=document.getElementById('fr-'+k);
-    const fright=document.getElementById('fright-'+k);
-    if(!tog) return;
-    const inP=included.includes(k);
-    tog.classList.toggle('on',inP); tog.classList.toggle('off',!inP);
-    fr.classList.toggle('in-plan',inP);
-    fn.classList.toggle('in-pl',inP);
-    fright.innerHTML=inP?`<span class="in-plan-tag">In ${planName}</span>`:'<span style="font-size:11px;color:var(--muted)">Not included</span>';
-  });
+  const included = PLAN_INCLUDES[selPlan]||[];
 
   Object.keys(ADDON_PRICES).forEach(k=>{
     const row=document.getElementById('fr-'+k);
@@ -886,21 +963,20 @@ function renderFeatureRows(){
 }
 
 function toggleAddon(key){
-  const baseKey=customMode?USER_PLAN:selPlan;
-  if((PLAN_INCLUDES[baseKey]||[]).includes(key)) return;
+  if((PLAN_INCLUDES[selPlan]||[]).includes(key)) return;
   if(addons[key]!==undefined) delete addons[key]; else addons[key]=ADDON_PRICES[key];
   renderFeatureRows();
   renderSummary();
 }
 
-/* ══════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    SUMMARY
-══════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function renderSummary(){
-  const baseKey   = customMode?USER_PLAN:selPlan;
+  const baseKey   = selPlan;
   const plan      = PLANS[baseKey];
   const isQuote   = baseKey==='quote';
-  const isFree    = baseKey==='free'&&!customMode;
+  const isFree    = baseKey==='free';
   const isAnnual  = billingMode==='annual'&&!isFree&&!isQuote&&plan.annPx!==null;
   const basePx    = plan.price===null?0:(isAnnual?plan.annPx:plan.price);
   const addonKeys = Object.keys(addons);
@@ -908,21 +984,15 @@ function renderSummary(){
   const total     = basePx+addonTot;
   const hasChange = (selPlan!==USER_PLAN)||addonKeys.length>0;
 
-  // current plan
-  const cur=PLANS[USER_PLAN];
-  document.getElementById('s-cur-name').textContent=cur.name;
-
-  // active features
-  const actF=PLAN_INCLUDES[USER_PLAN]||[];
-  document.getElementById('s-active-feats').innerHTML=actF.length===0
-    ?'<div class="sum-empty">No premium features active yet.</div>'
-    :actF.map(k=>`<div class="sum-feat"><i class="ti ti-check"></i><span>${ADDON_LABELS[k]||k}</span></div>`).join('');
+  // summary title
+  const titleEl=document.getElementById('sum-head-title');
+  if(titleEl) titleEl.textContent=(isFree&&addonKeys.length===0)?'Choose a plan':'Order summary';
 
   // upgrade section
   const upSec=document.getElementById('s-upgrade-sec');
   if(hasChange&&!isFree){
     upSec.style.display='block';
-    document.getElementById('s-up-name').textContent=customMode?'Custom build':plan.name;
+    document.getElementById('s-up-name').textContent=plan.name;
     document.getElementById('s-up-px').textContent=isQuote?'Custom quote':basePx===0?'Free':isAnnual?`$${(plan.annPx*12).toFixed(2)}/yr`:`$${basePx.toFixed(2)}/mo`;
   } else upSec.style.display='none';
 
@@ -938,33 +1008,45 @@ function renderSummary(){
       </div>`).join('');
   } else adSec.style.display='none';
 
-  // upsell
-  const upsell=document.getElementById('s-upsell');
-  if(customMode&&total>0){
-    const gPx=PLANS.growth.price;
-    const sav=total-gPx;
-    if(sav>0.5){
-      document.getElementById('s-upsell-txt').textContent=`Switching to Growth saves you $${sav.toFixed(2)}/mo and supports up to 50,000 products.`;
-      const lnk=document.getElementById('s-upsell-lnk');
-      lnk.textContent='Switch to Growth plan →';
-      lnk.onclick=()=>{selPlan='growth';addons={};customMode=false;document.getElementById('build-btn').classList.remove('active');document.getElementById('build-btn').textContent='Build your own';renderDualCards();renderFeatureRows();renderSummary();};
-      upsell.style.display='block';
-    } else upsell.style.display='none';
-  } else upsell.style.display='none';
+  // upsell â€” hidden (no longer applicable)
+  document.getElementById('s-upsell').style.display='none';
 
-  // total
+  // total with discount
   const totRow=document.getElementById('s-total-row');
+  const bdEl=document.getElementById('total-breakdown');
+  const toggleBtn=document.getElementById('total-toggle');
   if((hasChange||addonKeys.length>0)&&!isQuote){
     totRow.style.display='flex';
-    document.getElementById('s-total').innerHTML=total===0?'Free':isAnnual?`$${(plan.annPx*12+addonTot).toFixed(2)}<span>/yr</span>`:`$${total.toFixed(2)}<span>/mo</span>`;
-  } else totRow.style.display='none';
+    const rawTotal=isAnnual?(plan.annPx*12+addonTot):total;
+    const finalTotal=discountPct>0?rawTotal*(1-discountPct/100):rawTotal;
+    const suffix=isAnnual?'/yr':'/mo';
+    const discNote=discountPct>0?` <span style="font-size:11px;font-weight:400;color:var(--teal-dk)">-${discountPct}%</span>`:'';
+    document.getElementById('s-total').innerHTML=rawTotal===0?'Free':`$${finalTotal.toFixed(2)}<span>${suffix}</span>${discNote}`;
+    // update breakdown content (preserve open/closed state)
+    if(bdEl) bdEl.innerHTML=buildBreakdown(plan,isAnnual,addonKeys,rawTotal,finalTotal,suffix);
+  } else {
+    totRow.style.display='none';
+    if(bdEl){bdEl.style.display='none';bdEl.innerHTML='';}
+    if(toggleBtn) toggleBtn.classList.remove('open');
+  }
 
   // CTA
   const btn=document.getElementById('s-sub-btn');
-  if(isQuote){btn.textContent='Contact us for a quote';btn.className='sub-btn quote-state';}
-  else if(isFree&&addonKeys.length===0){btn.textContent="You're on the Free plan";btn.className='sub-btn free-state';}
-  else if(customMode){btn.textContent='Subscribe · custom build';btn.className='sub-btn';}
-  else{btn.textContent=`Upgrade to ${plan.name}`;btn.className='sub-btn';}
+  const curIdx2=PLAN_ORDER.indexOf(USER_PLAN);
+  const selIdx2=PLAN_ORDER.indexOf(selPlan);
+  if(isQuote){
+    btn.textContent='Contact us for a quote';btn.className='sub-btn quote-state';btn.onclick=applyPlanChange;
+  } else if(selPlan===USER_PLAN&&addonKeys.length===0){
+    btn.textContent=isFree?"You're on the Free plan":"You're on this plan";
+    btn.className='sub-btn free-state';btn.onclick=null;
+  } else if(selIdx2<curIdx2){
+    btn.textContent=`Downgrade to ${plan.name}`;
+    btn.className='sub-btn sub-btn-downgrade';btn.onclick=applyPlanChange;
+  } else if(selPlan===USER_PLAN){
+    btn.textContent='Subscribe add-ons';btn.className='sub-btn';btn.onclick=applyPlanChange;
+  } else {
+    btn.textContent=`Upgrade to ${plan.name}`;btn.className='sub-btn';btn.onclick=applyPlanChange;
+  }
 
   // downgrade link (only when user is on a paid plan)
   document.getElementById('downgrade-row').style.display=(USER_PLAN!=='free')?'block':'none';
@@ -977,11 +1059,11 @@ function renderSummary(){
   document.getElementById('s-lim-lbl').textContent=plan.limitLabel+' products';
 }
 
-/* ══════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    HELPERS - NEW FEATURES
-══════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
-// Reverse-interpolate: product count → slider position
+// Reverse-interpolate: product count â†’ slider position
 function posForCount(targetCount){
   for(let i=0;i<ANCHORS.length-1;i++){
     const a=ANCHORS[i],b=ANCHORS[i+1];
@@ -993,37 +1075,186 @@ function posForCount(targetCount){
   return 100;
 }
 
-// Auto-detect product count (simulated; in real app calls Shopify Admin API)
+// Auto-detect product count â€” always 5,000 for this store (replace with real API call)
 function detectProducts(){
+  const storeCount=5000;
+  const pos=posForCount(storeCount);
+  // Show amber tick line on slider
+  const tick=document.getElementById('store-tick');
+  if(tick){tick.style.left=pos+'%';tick.style.display='block';}
+  // Show "Your store" label below milestones
+  const lbl=document.getElementById('store-tick-lbl');
+  const row=document.getElementById('store-lbl-row');
+  if(lbl) lbl.style.left=pos+'%';
+  if(row) row.style.display='block';
+  // Update result text
   const result=document.getElementById('detect-result');
-  result.textContent='Checking…';result.style.display='inline';
-  setTimeout(()=>{
-    // Simulated count - replace with actual API call in production
-    const simCount=1243;
-    const rec=planForCount(simCount);
-    result.textContent=`Found ${fmtCount(simCount)} products → ${PLANS[rec].name} recommended`;
-    const pos=posForCount(simCount);
-    document.getElementById('prod-slider').value=pos;
-    onSlide(pos);
-  },900);
+  const rec=planForCount(storeCount);
+  result.textContent=`${fmtCount(storeCount)} products detected â†’ ${PLANS[rec].name} recommended`;
+  result.style.display='inline';
 }
 
-// Apply discount code (UI only - real validation happens server-side via Shopify billing API)
+// Apply discount: enter 1â€“100 to apply that % off the total
 function applyDiscount(){
-  const code=document.getElementById('discount-input').value.trim().toUpperCase();
+  const val=parseInt(document.getElementById('discount-input').value.trim(),10);
   const msg=document.getElementById('discount-msg');
-  if(!code){msg.textContent='Please enter a discount code.';msg.className='discount-msg err';return;}
-  // Demo codes - remove and replace with server call in production
-  const valid={SAVE10:'10% discount applied!',FINDTER20:'20% discount applied for your first 3 months!'};
-  if(valid[code]){msg.textContent=valid[code];msg.className='discount-msg ok';}
-  else{msg.textContent='Code not found or has expired.';msg.className='discount-msg err';}
+  if(isNaN(val)||val<1||val>100){
+    msg.textContent='Enter a number between 1 and 100.';
+    msg.className='discount-msg err';
+    discountPct=0;
+    renderSummary();
+    return;
+  }
+  discountPct=val;
+  msg.textContent=`${val}% discount applied!`;
+  msg.className='discount-msg ok';
+  renderSummary();
 }
 
-// Downgrade to Free plan
+// Simulate plan change (upgrade or downgrade)
+function applyPlanChange(){
+  const fromP=PLANS[USER_PLAN];
+  const toP=PLANS[selPlan];
+  const curIdx=PLAN_ORDER.indexOf(USER_PLAN);
+  const selIdx=PLAN_ORDER.indexOf(selPlan);
+
+  // Quote: special case
+  if(selPlan==='quote'){
+    alert('A member of our sales team will contact you within 24 hours to discuss a custom Enterprise plan.');
+    return;
+  }
+
+  // Addon-only (same plan, addons selected)
+  if(selPlan===USER_PLAN){
+    if(!confirm(`Add selected add-ons to your ${fromP.name} plan?\n\nThey are billed immediately upon confirmation.`)) return;
+    addons={};
+    discountPct=0;
+    _clearDiscount();
+    renderFeatureRows();
+    renderSummary();
+    showToast('Add-ons subscribed!','ok');
+    return;
+  }
+
+  const isUpgrade=selIdx>curIdx;
+  let msg=isUpgrade
+    ?`Upgrade from ${fromP.name} to ${toP.name}?${toP.price?'\n\nYour 14-day free trial starts today â€” no charge until it ends.':''}`
+    :`Downgrade from ${fromP.name} to ${toP.name}?\n\nYour current plan stays active until the end of the billing period.`;
+
+  if(!confirm(msg)) return;
+
+  // Apply
+  USER_PLAN=selPlan;
+  USER_BILLING=billingMode; // lock the billing cycle to whatever toggle was active
+  if(USER_PLAN!=='free'&&USER_PLAN!=='quote') _computeExpiry(billingMode); else planExpiresDate=null;
+  addons={};
+  discountPct=0;
+  _clearDiscount();
+  renderDualCards();
+  renderFeatureRows();
+  renderSummary();
+  initCurrentPlanBanner();
+  showToast(
+    isUpgrade?`Upgraded to ${toP.name} plan!`:`Downgraded to ${toP.name} plan.`,
+    isUpgrade?'ok':'info'
+  );
+}
+
+// Downgrade to Free directly from the cancel link
 function downgradeToFree(){
-  if(!confirm('Cancel your plan and downgrade to Free?\n\nYour paid features will remain active until the end of the current billing period.')) return;
-  // In a real app this calls the Shopify billing cancellation API
-  alert('Your plan has been scheduled to downgrade to Free at the end of the current billing period.');
+  if(USER_PLAN==='free') return;
+  const fromP=PLANS[USER_PLAN];
+  if(!confirm(`Cancel your ${fromP.name} plan and downgrade to Free?\n\nYour paid features remain active until the end of the current billing period.`)) return;
+  USER_PLAN='free';
+  USER_BILLING='monthly';
+  planExpiresDate=null;
+  selPlan='free';
+  addons={};
+  discountPct=0;
+  _clearDiscount();
+  const pos=posForCount(300);
+  const slider=document.getElementById('prod-slider');
+  if(slider){slider.value=pos;onSlide(pos);}
+  renderDualCards();
+  renderFeatureRows();
+  renderSummary();
+  initCurrentPlanBanner();
+  showToast('Downgraded to Free plan.','info');
+}
+
+// Switch billing cycle of the current plan (monthly â†” annual)
+function switchBilling(){
+  const toMode=billingMode;
+  const toLabel=toMode==='annual'?'Annual':'Monthly';
+  const fromLabel=USER_BILLING==='annual'?'Annual':'Monthly';
+  const p=PLANS[USER_PLAN];
+  let detail='';
+  if(toMode==='annual'){
+    detail=`\n\nNew rate: $${(p.annPx*12).toFixed(2)}/year ($${p.annPx.toFixed(2)}/mo) â€” save 17%.`;
+  } else {
+    detail=`\n\nNew rate: $${p.price.toFixed(2)}/month. You will be billed monthly going forward.`;
+  }
+  if(!confirm(`Switch your ${p.name} plan from ${fromLabel} to ${toLabel} billing?${detail}`)) return;
+  USER_BILLING=toMode;
+  _computeExpiry(toMode);
+  initCurrentPlanBanner();
+  renderDualCards();
+  renderSummary();
+  showToast(`Switched to ${toLabel} billing!`,'ok');
+}
+
+// Compute and store the plan expiry date based on billing mode
+function _computeExpiry(mode){
+  const now=new Date();
+  if(mode==='annual'){
+    planExpiresDate=new Date(now.getFullYear()+1,now.getMonth(),now.getDate());
+  } else {
+    planExpiresDate=new Date(now.getFullYear(),now.getMonth()+1,now.getDate());
+  }
+}
+function _clearDiscount(){
+  const inp=document.getElementById('discount-input');
+  const msg=document.getElementById('discount-msg');
+  if(inp) inp.value='';
+  if(msg){msg.textContent='';msg.className='discount-msg';}
+}
+
+function showToast(msg, type='ok'){
+  const old=document.getElementById('plan-toast');
+  if(old) old.remove();
+  const t=document.createElement('div');
+  t.id='plan-toast';t.className=`plan-toast ${type}`;
+  t.innerHTML=`<i class="ti ti-${type==='ok'?'circle-check':'arrow-down-right'}"></i> ${msg}`;
+  document.body.appendChild(t);
+  setTimeout(()=>{if(t.parentNode)t.remove();},3500);
+}
+
+// Build the breakdown line items for the total dropdown
+function buildBreakdown(plan, isAnnual, addonKeys, rawTotal, finalTotal, suffix){
+  let html='';
+  if(plan.price!==0&&plan.price!==null){
+    const px=isAnnual?plan.annPx*12:plan.price;
+    html+=`<div class="bd-line"><span>${plan.name} plan${isAnnual?' (annual)':''}</span><span>$${px.toFixed(2)}${suffix}</span></div>`;
+  }
+  addonKeys.forEach(k=>{
+    html+=`<div class="bd-line"><span>${ADDON_LABELS[k]||k}</span><span>$${addons[k].toFixed(2)}/mo</span></div>`;
+  });
+  if(discountPct>0){
+    const saving=(rawTotal-finalTotal);
+    html+=`<div class="bd-divider"></div>`;
+    html+=`<div class="bd-line bd-original"><span>Original</span><span>$${rawTotal.toFixed(2)}${suffix}</span></div>`;
+    html+=`<div class="bd-line bd-discount"><span>Discount (${discountPct}%)</span><span>âˆ’$${saving.toFixed(2)}</span></div>`;
+  }
+  return html;
+}
+
+// Toggle the total breakdown dropdown
+function toggleBreakdown(){
+  const bd=document.getElementById('total-breakdown');
+  const btn=document.getElementById('total-toggle');
+  const wasOpen=bd.style.display!=='none';
+  bd.style.display=wasOpen?'none':'block';
+  if(btn) btn.classList.toggle('open',!wasOpen);
 }
 
 // Toggle FAQ accordion items
@@ -1035,24 +1266,53 @@ function toggleFaq(btn){
   if(!wasOpen){answer.classList.add('open');btn.classList.add('open');}
 }
 
-// Populate current plan banner from USER_PLAN constant
+// Populate current plan banner — plan name + expiry date
 function initCurrentPlanBanner(){
   const cur=PLANS[USER_PLAN];
-  document.getElementById('cb-plan-name').textContent=cur.name+' plan';
-  document.getElementById('cb-plan-sub').textContent=
-    cur.price===0
-      ?`No charge · up to ${cur.limitLabel} products · active now`
-      :`$${cur.price.toFixed(2)}/mo · up to ${cur.limitLabel} products · active now`;
+  const nameEl=document.getElementById('cb-plan-name');
+  if(nameEl) nameEl.textContent=cur.name+' plan';
+  const subEl=document.getElementById('cb-plan-sub');
+  if(subEl) subEl.textContent=cur.price===0
+    ?`No charge · up to ${cur.limitLabel} products · active now`
+    :`$${cur.price.toFixed(2)}/mo · up to ${cur.limitLabel} products · active now`;
+  // Expiry date line
+  const expiryRow=document.getElementById('cb-plan-expiry');
+  const expiryTxt=document.getElementById('cb-expiry-txt');
+  if(expiryRow&&expiryTxt){
+    if(planExpiresDate&&cur.price!==0&&cur.price!==null){
+      const fmt=planExpiresDate.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+      expiryTxt.textContent=`Plan expires on: ${fmt}`;
+      expiryRow.style.display='flex';
+    } else {
+      expiryRow.style.display='none';
+    }
+  }
 }
 
-/* ══════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    INIT
-══════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 buildMilestones();
 buildFeatureList();
+// Default slider to 5,000 products on every page load
+(function(){
+  const initPos=posForCount(5000);
+  const slider=document.getElementById('prod-slider');
+  if(slider){slider.value=initPos;onSlide(initPos);}
+})();
 renderDualCards();
 renderSummary();
 initCurrentPlanBanner();
+// init badge pill for starting plan
+(function(){
+  const el=document.getElementById('plan-badge-lbl');
+  if(el) el.innerHTML=PLANS[selPlan].badgeTxt?`<span class="plan-badge-pill">${PLANS[selPlan].badgeTxt}</span>`:'&nbsp;';
+})();
 </script>
 </body>
 </html>
+
+
+
+
+
