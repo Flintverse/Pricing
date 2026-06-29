@@ -287,6 +287,11 @@ input[type=range]::-moz-range-thumb{
 /* ── TRIAL RIBBON ── */
 .trial-ribbon{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;color:var(--teal-dk);background:var(--teal-lt);border:1px solid #99f6e4;border-radius:999px;padding:3px 8px;margin-bottom:8px}
 
+/* ── CARD SELECTION ── */
+.plan-card{cursor:pointer}
+.plan-card.is-selected{outline:2.5px solid var(--teal);outline-offset:2px}
+.card-sel-tick{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;color:var(--teal-dk);background:var(--teal-lt);border-radius:999px;padding:2px 8px;margin-bottom:8px}
+
 /* ── NO-TRIAL NOTICE ── */
 .no-trial-note{padding:8px 16px;font-size:11px;color:var(--amb-txt);background:var(--amb);border-top:1px solid var(--amb-bdr);display:flex;align-items:flex-start;gap:6px;line-height:1.5}
 .no-trial-note>i{font-size:13px;flex-shrink:0;margin-top:1px}
@@ -636,6 +641,7 @@ let selPlan     = 'free';
 let customMode  = false;
 let addons      = {};
 let sliderPos   = 0;
+let billingMode = 'monthly'; // 'monthly' | 'annual'
 
 /* ══════════════════════════════════════════
    HELPERS
@@ -749,6 +755,7 @@ function cardHTML(planKey, mode /* 'monthly'|'annual' */){
   const isAnn=(mode==='annual');
   const isQuote=(planKey==='quote');
   const isFree=(p.price===0);
+  const isSelected=(billingMode===mode);
 
   const badgeHTML = p.badgeTxt
     ? `<span class="pc-badge ${p.badge}">${p.badgeTxt}</span>` : '';
@@ -776,7 +783,8 @@ function cardHTML(planKey, mode /* 'monthly'|'annual' */){
 
   if(isQuote){
     return `
-      <div class="plan-card ${isAnn?'annual-card quote-card':'monthly-card quote-card'}">
+      <div class="plan-card ${isAnn?'annual-card quote-card':'monthly-card quote-card'}${isSelected?' is-selected':''}" onclick="selectBilling('${mode}')">
+        ${isSelected?'<div class="card-sel-tick"><i class="ti ti-check"></i> Selected</div>':''}
         ${isAnn?'<div class="annual-ribbon">Annual</div>':'<div class="monthly-chip">Monthly</div>'}
         <div class="pc-head">
           <div class="pc-name-row"><span class="pc-name">${p.name}</span>${badgeHTML}</div>
@@ -790,8 +798,9 @@ function cardHTML(planKey, mode /* 'monthly'|'annual' */){
   }
 
   return `
-    <div class="plan-card ${isAnn?'annual-card':'monthly-card'}">
+    <div class="plan-card ${isAnn?'annual-card':'monthly-card'}${isSelected?' is-selected':''}" onclick="selectBilling('${mode}')">
       ${isAnn?'<div class="annual-ribbon">Annual · Save 17%</div>':'<div class="monthly-chip">Monthly</div>'}
+      ${isSelected?'<div class="card-sel-tick"><i class="ti ti-check"></i> Selected</div>':''}
       ${!isFree?'<div class="trial-ribbon"><i class="ti ti-clock"></i> 14-day free trial included</div>':''}
       <div class="pc-head">
         <div class="pc-name-row"><span class="pc-name">${p.name}</span>${badgeHTML}</div>
@@ -806,6 +815,12 @@ function cardHTML(planKey, mode /* 'monthly'|'annual' */){
 function renderDualCards(){
   document.getElementById('dual-cards').innerHTML =
     cardHTML(selPlan,'monthly') + cardHTML(selPlan,'annual');
+}
+
+function selectBilling(mode){
+  billingMode=mode;
+  renderDualCards();
+  renderSummary();
 }
 
 /* ══════════════════════════════════════════
@@ -886,7 +901,8 @@ function renderSummary(){
   const plan      = PLANS[baseKey];
   const isQuote   = baseKey==='quote';
   const isFree    = baseKey==='free'&&!customMode;
-  const basePx    = plan.price===null?0:plan.price;
+  const isAnnual  = billingMode==='annual'&&!isFree&&!isQuote&&plan.annPx!==null;
+  const basePx    = plan.price===null?0:(isAnnual?plan.annPx:plan.price);
   const addonKeys = Object.keys(addons);
   const addonTot  = addonKeys.reduce((s,k)=>s+addons[k],0);
   const total     = basePx+addonTot;
@@ -907,7 +923,7 @@ function renderSummary(){
   if(hasChange&&!isFree){
     upSec.style.display='block';
     document.getElementById('s-up-name').textContent=customMode?'Custom build':plan.name;
-    document.getElementById('s-up-px').textContent=isQuote?'Custom quote':basePx===0?'Free':`$${basePx.toFixed(2)}/mo`;
+    document.getElementById('s-up-px').textContent=isQuote?'Custom quote':basePx===0?'Free':isAnnual?`$${(plan.annPx*12).toFixed(2)}/yr`:`$${basePx.toFixed(2)}/mo`;
   } else upSec.style.display='none';
 
   // addons
@@ -940,7 +956,7 @@ function renderSummary(){
   const totRow=document.getElementById('s-total-row');
   if((hasChange||addonKeys.length>0)&&!isQuote){
     totRow.style.display='flex';
-    document.getElementById('s-total').innerHTML=total===0?'Free':`$${total.toFixed(2)}<span>/mo</span>`;
+    document.getElementById('s-total').innerHTML=total===0?'Free':isAnnual?`$${(plan.annPx*12+addonTot).toFixed(2)}<span>/yr</span>`:`$${total.toFixed(2)}<span>/mo</span>`;
   } else totRow.style.display='none';
 
   // CTA
