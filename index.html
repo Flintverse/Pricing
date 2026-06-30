@@ -204,13 +204,22 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 .lim-meta strong{font-size:10px;font-weight:600;color:var(--teal-dk)}
 
 /* -- CURRENT PLAN BANNER -- */
-.cur-banner{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 16px;border:1.5px solid var(--teal);border-radius:12px;background:var(--teal-pl);margin-bottom:1.25rem}
+.cur-banner{display:flex;flex-direction:column;gap:10px;padding:12px 16px;border:1.5px solid var(--teal);border-radius:12px;background:var(--teal-pl);margin-bottom:1.25rem}
+.cur-banner-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .cur-banner-left{display:flex;align-items:center;gap:10px}
 .cur-banner-left>i{font-size:20px;color:var(--teal);flex-shrink:0}
 .cur-banner-plan{font-size:13px;color:var(--txt);line-height:1.3}
 .cur-banner-expiry{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--muted);margin-top:3px}
 .cur-banner-expiry i{font-size:12px;flex-shrink:0}
 .cur-banner-badge{font-size:13px;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--teal);color:#fff;flex-shrink:0}
+.cur-banner-lim{margin-top:2px}
+.cur-banner-lim-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
+.cur-banner-lim-hdr span{font-size:11px;color:var(--muted);font-weight:500}
+.cur-banner-lim-hdr strong{font-size:11px;font-weight:600;color:var(--teal-dk)}
+
+/* -- CARD DISCOUNT LINK -- */
+.card-discount-link{display:block;text-align:center;font-size:11.5px;color:var(--muted);text-decoration:underline;cursor:pointer;background:none;border:none;font-family:var(--font);padding:8px 0 0;width:100%;transition:color .12s}
+.card-discount-link:hover{color:var(--txt2)}
 
 /* -- DETECT -- */
 .detect-wrap{margin-top:.75rem;margin-bottom:.65rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
@@ -361,17 +370,26 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 
   <!-- CURRENT PLAN BANNER -->
   <div class="cur-banner">
-    <div class="cur-banner-left">
-      <i class="ti ti-circle-check-filled"></i>
-      <div>
-        <div class="cur-banner-plan">You are currently on the <strong id="cb-plan-name">Free plan</strong></div>
-        <div class="cur-banner-expiry" id="cb-plan-expiry" style="display:none">
-          <i class="ti ti-calendar-event"></i>
-          <span id="cb-expiry-txt"></span>
+    <div class="cur-banner-top">
+      <div class="cur-banner-left">
+        <i class="ti ti-circle-check-filled"></i>
+        <div>
+          <div class="cur-banner-plan">You are currently on the <strong id="cb-plan-name">Free plan</strong></div>
+          <div class="cur-banner-expiry" id="cb-plan-expiry" style="display:none">
+            <i class="ti ti-calendar-event"></i>
+            <span id="cb-expiry-txt"></span>
+          </div>
         </div>
       </div>
+      <span class="cur-banner-badge">Active</span>
     </div>
-    <span class="cur-banner-badge">Active</span>
+    <div class="cur-banner-lim">
+      <div class="cur-banner-lim-hdr">
+        <span>Product limit on current plan</span>
+        <strong id="cb-lim-lbl">300 products</strong>
+      </div>
+      <div class="lim-track"><div class="lim-fill" id="cb-lim-fill" style="width:1%"></div></div>
+    </div>
   </div>
 
   <!-- ADDON STATUS BANNER -->
@@ -387,7 +405,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 
   <!-- == TAB 1: PRICING PLAN == -->
   <div id="tab-pricing-content">
-    <div class="root">
+    <div class="root" style="grid-template-columns:1fr">
       <div class="left">
 
         <!-- SLIDER -->
@@ -445,49 +463,6 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 
       </div><!-- /.left -->
 
-      <!-- PLAN ORDER SUMMARY -->
-      <div class="right">
-        <div class="sum-card">
-          <div class="sum-head"><div class="sum-head-title" id="sum-head-title">Plan summary</div></div>
-          <div class="sum-body">
-
-            <div id="s-plan-sec" style="display:none">
-              <div class="sum-lbl">Plan</div>
-              <div class="sum-up-row">
-                <span class="sum-up-name" id="s-up-name">-</span>
-                <span class="sum-up-px" id="s-up-px">-</span>
-              </div>
-            </div>
-
-            <div class="discount-wrap" id="discount-wrap" style="display:none">
-              <div class="sum-lbl">Discount code</div>
-              <div class="discount-row">
-                <input class="discount-input" id="discount-input" type="number" min="1" max="100" placeholder="1-100 %" />
-                <button class="discount-apply" onclick="applyDiscount()">Apply</button>
-              </div>
-              <div class="discount-msg" id="discount-msg"></div>
-            </div>
-
-            <div class="sum-total-row" id="s-total-row" style="display:none">
-              <span class="sum-total-lbl">Total <button class="total-toggle" id="total-toggle" onclick="toggleBreakdown()"><i class="ti ti-chevron-down"></i></button></span>
-              <span class="sum-total-val" id="s-total">$0<span>/mo</span></span>
-            </div>
-            <div class="total-breakdown" id="total-breakdown" style="display:none"></div>
-
-            <button class="sub-btn free-state" id="s-sub-btn">You're on the Free plan</button>
-            <div class="downgrade-row" id="downgrade-row" style="display:none">
-              <button class="downgrade-lnk" onclick="openPlanModal('free')">Cancel plan - downgrade to Free</button>
-            </div>
-
-            <div class="lim-bar">
-              <div class="lim-bar-lbl">Product limit on this plan</div>
-              <div class="lim-track"><div class="lim-fill" id="s-lim-fill" style="width:1%"></div></div>
-              <div class="lim-meta"><span>Limit</span><strong id="s-lim-lbl">300 products</strong></div>
-            </div>
-
-          </div>
-        </div>
-      </div>
 
     </div>
 
@@ -576,6 +551,28 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
   </div><!-- /#tab-addons-content -->
 
 </div><!-- /.wrap -->
+
+<!-- DISCOUNT CODE MODAL -->
+<div class="modal-overlay" id="disc-modal" style="display:none" onclick="discModalBgClick(event)">
+  <div class="modal-box">
+    <div class="modal-head">
+      <span class="modal-title-txt">Discount code</span>
+      <button class="modal-close-btn" onclick="closeDiscModal()">&times;</button>
+    </div>
+    <div style="margin-bottom:1rem">
+      <div class="discount-row">
+        <input class="discount-input" id="disc-code-input" type="text" placeholder="Enter your code..." style="text-transform:uppercase" onkeydown="if(event.key==='Enter')applyCardDiscount()"/>
+        <button class="discount-apply" onclick="applyCardDiscount()">Apply</button>
+      </div>
+      <div class="discount-msg" id="disc-msg" style="margin-top:6px;min-height:16px"></div>
+      <div id="disc-summary-section" style="display:none"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="modal-btn" onclick="closeDiscModal()">Cancel</button>
+      <button class="modal-btn modal-btn-primary" id="disc-confirm-btn" onclick="applyCardDiscount()">Apply</button>
+    </div>
+  </div>
+</div>
 
 <!-- PLAN CHANGE MODAL -->
 <div class="modal-overlay" id="plan-modal" style="display:none" onclick="modalBgClick(event)">
@@ -707,6 +704,9 @@ let addonDiscPct    = 0;
 let subscribedAddons= {}; // key -> { price, expiresDate }
 let cardFeatsOpen   = { free:false, sel:false };
 let pendingAction   = null;
+let cardDiscountPct = 0;
+let pendingDiscPlan = null;
+let pendingDiscBill = null;
 
 /* HELPERS */
 function countForPos(pos){
@@ -867,6 +867,10 @@ function renderSelCard(){
 
   const isBillSwitch=isCurrent&&!isQuote&&billingMode!==USER_BILLING;
   const extraClass=isAnn&&!isQuote?' annual-card':'';
+  const showDiscount=!isQuote&&!isCurrent&&!isBillSwitch;
+  const discountLink=showDiscount
+    ?`<button class="card-discount-link" onclick="openDiscountModal('${selPlan}')">Have a discount code?</button>`
+    :'';
 
   const pill=PLAN_PILLS[selPlan]
     ?`<span class="pc-plan-pill ${PLAN_PILLS[selPlan].cls}">${PLAN_PILLS[selPlan].label}</span>`
@@ -932,7 +936,10 @@ function renderSelCard(){
           <div class="feat-collapse-list">${featItems}</div>
         </div>
       </div>
-      <div class="pc-cta-area">${cta}</div>
+      <div class="pc-cta-area">
+        ${discountLink}
+        ${cta}
+      </div>
     </div>`;
 }
 
@@ -973,65 +980,8 @@ function switchBillingModal(newMode){
   );
 }
 
-/* PLAN SUMMARY */
-function renderPlanSummary(){
-  const plan=PLANS[selPlan];
-  const isQuote=selPlan==='quote';
-  const isFree=selPlan==='free';
-  const isAnn=billingMode==='annual'&&!isFree&&!isQuote;
-  const basePx=plan.price===null?0:(isAnn?plan.annPx:plan.price);
-  const isBillSwitch=!isFree&&!isQuote&&selPlan===USER_PLAN&&billingMode!==USER_BILLING;
-  const hasChange=selPlan!==USER_PLAN||isBillSwitch;
-
-  document.getElementById('sum-head-title').textContent=hasChange?'Order summary':'Plan summary';
-
-  const planSec=document.getElementById('s-plan-sec');
-  if(hasChange&&!isFree){
-    planSec.style.display='block';
-    document.getElementById('s-up-name').textContent=plan.name+(isAnn?' (annual)':'');
-    document.getElementById('s-up-px').textContent=isQuote?'Custom quote'
-      :isAnn?`$${(plan.annPx*12).toFixed(2)}/yr`:`$${basePx.toFixed(2)}/mo`;
-  } else planSec.style.display='none';
-
-  document.getElementById('discount-wrap').style.display=(hasChange&&!isFree&&!isQuote)?'block':'none';
-
-  const totRow=document.getElementById('s-total-row');
-  const bdEl=document.getElementById('total-breakdown');
-  const toggleBtn=document.getElementById('total-toggle');
-  if(hasChange&&!isFree&&!isQuote){
-    const rawTotal=isAnn?(plan.annPx*12):basePx;
-    const finalTotal=discountPct>0?rawTotal*(1-discountPct/100):rawTotal;
-    const suffix=isAnn?'/yr':'/mo';
-    const discNote=discountPct>0?` <span style="font-size:11px;font-weight:400;color:var(--teal-dk)">-${discountPct}%</span>`:'';
-    totRow.style.display='flex';
-    document.getElementById('s-total').innerHTML=`$${finalTotal.toFixed(2)}<span>${suffix}</span>${discNote}`;
-    if(bdEl) bdEl.innerHTML=buildPlanBreakdown(plan,isAnn,rawTotal,finalTotal,suffix);
-  } else {
-    totRow.style.display='none';
-    if(bdEl){bdEl.style.display='none';bdEl.innerHTML='';}
-    if(toggleBtn) toggleBtn.classList.remove('open');
-  }
-
-  const btn=document.getElementById('s-sub-btn');
-  if(isQuote){
-    btn.textContent='Contact us for a quote';btn.className='sub-btn quote-state';
-    btn.onclick=()=>openPlanModal('quote');
-  } else if(isBillSwitch){
-    const lbl=billingMode==='annual'?'Annually':'Monthly';
-    btn.textContent=`Switch to ${lbl}`;btn.className='sub-btn';
-    btn.onclick=()=>switchBillingModal(billingMode);
-  } else if(!hasChange){
-    btn.textContent=isFree?"You're on the Free plan":"You're on this plan";
-    btn.className='sub-btn free-state';btn.onclick=null;
-  } else {
-    btn.textContent='To Payment →';btn.className='sub-btn';
-    btn.onclick=()=>openPlanModal(selPlan);
-  }
-
-  document.getElementById('downgrade-row').style.display=USER_PLAN!=='free'?'block':'none';
-  document.getElementById('s-lim-fill').style.width=plan.limitPct+'%';
-  document.getElementById('s-lim-lbl').textContent=plan.limitLabel+' products';
-}
+/* PLAN SUMMARY — removed panel, now a no-op */
+function renderPlanSummary(){}
 
 function buildPlanBreakdown(plan,isAnn,raw,final,suffix){
   let h='';
@@ -1331,6 +1281,10 @@ function initCurrentPlanBanner(){
       expiryRow.style.display='flex';
     } else expiryRow.style.display='none';
   }
+  const fillEl=document.getElementById('cb-lim-fill');
+  const lblEl=document.getElementById('cb-lim-lbl');
+  if(fillEl) fillEl.style.width=cur.limitPct+'%';
+  if(lblEl) lblEl.textContent=cur.limitLabel+' products';
 }
 
 /* DETECT PRODUCTS */
@@ -1449,6 +1403,84 @@ function chatSend(){
 }
 
 function chatKeyDown(e){if(e.key==='Enter')chatSend();}
+
+/* DISCOUNT MODAL */
+const DISC_CODES={'SAVE10':10,'SAVE20':20,'SAVE15':15,'FINDTER':17,'WELCOME':25};
+
+function openDiscountModal(plan){
+  pendingDiscPlan=plan;
+  pendingDiscBill=billingMode;
+  cardDiscountPct=0;
+  const input=document.getElementById('disc-code-input');
+  const msg=document.getElementById('disc-msg');
+  const summary=document.getElementById('disc-summary-section');
+  const btn=document.getElementById('disc-confirm-btn');
+  if(input){input.value='';}
+  if(msg){msg.textContent='';msg.className='discount-msg';}
+  if(summary){summary.style.display='none';summary.innerHTML='';}
+  if(btn){btn.textContent='Apply';btn.onclick=applyCardDiscount;}
+  document.getElementById('disc-modal').style.display='flex';
+  setTimeout(()=>{if(input)input.focus();},60);
+}
+
+function applyCardDiscount(){
+  const code=(document.getElementById('disc-code-input').value||'').trim().toUpperCase();
+  const msg=document.getElementById('disc-msg');
+  const pct=DISC_CODES[code];
+  if(!code){
+    msg.textContent='Please enter a discount code.';msg.className='discount-msg err';return;
+  }
+  if(!pct){
+    msg.textContent='Invalid or expired code. Try SAVE10, SAVE20, or WELCOME.';msg.className='discount-msg err';return;
+  }
+  cardDiscountPct=pct;
+  msg.textContent=`Code "${code}" applied — ${pct}% off!`;msg.className='discount-msg ok';
+  renderDiscSummary(pct);
+  document.getElementById('disc-summary-section').style.display='block';
+  const btn=document.getElementById('disc-confirm-btn');
+  if(btn){btn.textContent='Process to Payment →';btn.onclick=processDiscPayment;}
+}
+
+function renderDiscSummary(pct){
+  const plan=PLANS[pendingDiscPlan];
+  const isAnn=pendingDiscBill==='annual'&&plan.price!==null;
+  const raw=isAnn?plan.annPx*12:plan.price;
+  const final=raw*(1-pct/100);
+  const suffix=isAnn?'/yr':'/mo';
+  const saving=(raw-final).toFixed(2);
+  document.getElementById('disc-summary-section').innerHTML=`
+    <div style="margin-top:14px;padding:12px 14px;background:var(--s1);border-radius:var(--r);border:1px solid var(--bdr)">
+      <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:10px">Order summary</div>
+      <div style="display:flex;justify-content:space-between;font-size:12.5px;padding:4px 0;color:var(--txt2)">
+        <span>${plan.name} Plan${isAnn?' (annual)':''}</span>
+        <span style="font-weight:500;color:var(--txt)">$${raw.toFixed(2)}${suffix}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:12.5px;padding:4px 0;color:var(--teal-dk)">
+        <span style="font-weight:600">Discount (${pct}%)</span>
+        <span style="font-weight:700">-$${saving}</span>
+      </div>
+      <div style="height:1px;background:var(--bdr2);margin:8px 0"></div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline">
+        <span style="font-size:13px;font-weight:600;color:var(--txt)">Total</span>
+        <span style="font-size:20px;font-weight:700;color:var(--txt)">$${final.toFixed(2)}<span style="font-size:11px;font-weight:400;color:var(--muted)">${suffix}</span></span>
+      </div>
+    </div>`;
+}
+
+function processDiscPayment(){
+  const plan=pendingDiscPlan;
+  closeDiscModal();
+  applyPlanChange(plan);
+}
+
+function closeDiscModal(){
+  document.getElementById('disc-modal').style.display='none';
+  cardDiscountPct=0;pendingDiscPlan=null;
+}
+
+function discModalBgClick(e){
+  if(e.target.id==='disc-modal') closeDiscModal();
+}
 
 /* INIT */
 buildMilestones();
