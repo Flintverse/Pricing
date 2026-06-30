@@ -55,9 +55,6 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 .ms-lbl{font-size:9px;color:var(--muted);white-space:nowrap;font-weight:500;text-align:center}
 .milestones .ms-dot:last-child{transform:translateX(-80%)}
 
-.plan-hint{text-align:center;margin-top:.6rem;font-size:12px;color:var(--muted)}
-.plan-hint strong{color:var(--teal-dk);font-weight:600}
-.plan-badge-pill{display:inline-block;background:#dcfce7;color:#166534;border:1px solid #86efac;border-radius:999px;padding:2px 9px;font-size:10px;font-weight:600;letter-spacing:.01em;vertical-align:middle;margin-left:3px}
 
 /* -- DUAL PLAN CARDS (CSS subgrid for cross-card alignment) -- */
 .dual-cards{display:grid;grid-template-columns:1fr 1fr;column-gap:12px;row-gap:0;margin-bottom:1.25rem;grid-template-rows:repeat(5,auto)}
@@ -85,6 +82,12 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 }
 .pc-name-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .pc-name{font-size:15px;font-weight:700;color:var(--txt)}
+.pc-name-wrap{display:flex;flex-direction:column;gap:5px}
+.pc-plan-pill{display:inline-flex;align-items:center;font-size:10px;font-weight:600;padding:2px 9px;border-radius:999px;width:fit-content}
+.pill-popular{background:var(--teal-lt);color:var(--teal-dk);border:1px solid #a7f3d0}
+.pill-large{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe}
+.pill-massive{background:#fff7ed;color:#c2410c;border:1px solid #fed7aa}
+.pill-custom{background:#fdf4ff;color:#86198f;border:1px solid #f0abfc}
 .pc-badge{font-size:10px;font-weight:500;padding:2px 7px;border-radius:999px}
 .badge-free   {background:#f3f4f6;color:#6b7280;border:1px solid var(--bdr)}
 .badge-starter{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe}
@@ -124,8 +127,8 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 .card-billing-inner{display:flex;border:1.5px solid var(--bdr);border-radius:999px;overflow:hidden;background:var(--s2)}
 .card-bill-tab{padding:4px 13px;font-size:11px;font-weight:600;border:none;background:transparent;cursor:pointer;font-family:var(--font);color:var(--txt2);transition:background .15s,color .15s;white-space:nowrap;line-height:1.5}
 .card-bill-tab.active{background:var(--teal);color:#fff}
-.card-bill-save{background:#dcfce7;color:#166534;border-radius:999px;padding:1px 5px;font-size:8.5px;font-weight:700;margin-left:3px}
-.card-bill-tab.active .card-bill-save{background:rgba(255,255,255,.25);color:#fff}
+.card-bill-save{background:#fff7ed;color:#c2410c;border:1px solid #fed7aa;border-radius:999px;padding:1px 5px;font-size:8.5px;font-weight:700;margin-left:3px}
+.card-bill-tab.active .card-bill-save{background:rgba(255,255,255,.2);color:#fff;border-color:transparent}
 
 /* -- FEATURE COLLAPSE -- */
 .feat-collapse{margin-bottom:0}
@@ -207,10 +210,10 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 .cur-banner-plan{font-size:13px;color:var(--txt);line-height:1.3}
 .cur-banner-expiry{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--muted);margin-top:3px}
 .cur-banner-expiry i{font-size:12px;flex-shrink:0}
-.cur-banner-badge{font-size:10px;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--teal);color:#fff;flex-shrink:0}
+.cur-banner-badge{font-size:13px;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--teal);color:#fff;flex-shrink:0}
 
 /* -- DETECT -- */
-.detect-wrap{margin-top:.8rem;padding-top:.75rem;border-top:1px solid var(--bdr);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.detect-wrap{margin-top:.75rem;margin-bottom:.65rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .detect-btn{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;font-size:12px;font-weight:500;border-radius:var(--r);border:1.5px solid var(--bdr2);background:var(--s1);cursor:pointer;color:var(--txt2);font-family:var(--font);transition:all .15s}
 .detect-btn:hover{background:var(--bdr);border-color:var(--txt2)}
 .detect-result{font-size:12px;color:var(--teal-dk);font-weight:500}
@@ -297,6 +300,51 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 .addon-banner-item{font-size:12px;color:#4338ca;display:flex;align-items:center;gap:6px;padding:2.5px 0;line-height:1.4}
 .addon-banner-item i{font-size:12px;color:#6366f1;flex-shrink:0}
 .addon-active-chip{display:inline-flex;align-items:center;gap:3px;font-size:9px;font-weight:700;padding:2px 7px;border-radius:999px;background:#dcfce7;color:#166534;border:1px solid #86efac}
+
+/* -- CHAT BUBBLE -- */
+.chat-bubble-btn{position:fixed;bottom:24px;right:24px;width:54px;height:54px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 18px rgba(13,148,136,.45);z-index:8999;border:none;transition:transform .15s,box-shadow .15s}
+.chat-bubble-btn:hover{transform:scale(1.08);box-shadow:0 6px 24px rgba(13,148,136,.55)}
+.chat-bubble-btn i{font-size:22px}
+.chat-bubble-btn::before{content:'';position:absolute;inset:-6px;border-radius:50%;border:2px solid rgba(13,148,136,.3);animation:chatPulse 2.2s ease infinite;pointer-events:none}
+@keyframes chatPulse{0%,100%{opacity:.6;transform:scale(1)}55%{opacity:0;transform:scale(1.18)}}
+
+/* -- CHAT BOX -- */
+.chat-box{position:fixed;bottom:90px;right:24px;width:320px;height:430px;background:#fff;border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.18);z-index:9000;display:none;flex-direction:column;overflow:hidden;border:1px solid var(--bdr)}
+.chat-box.open{display:flex;animation:chatIn .2s ease}
+@keyframes chatIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.chat-hd{padding:12px 14px;background:var(--teal);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.chat-hd-left{display:flex;align-items:center;gap:10px}
+.chat-hd-avatar{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.chat-hd-avatar i{font-size:19px;color:#fff}
+.chat-hd-name{font-size:13px;font-weight:600;color:#fff}
+.chat-hd-status{display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,.8);margin-top:2px}
+.chat-hd-dot{width:7px;height:7px;border-radius:50%;background:#4ade80;flex-shrink:0}
+.chat-hd-close{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.75);padding:4px;line-height:1;transition:color .12s}
+.chat-hd-close:hover{color:#fff}
+.chat-hd-close i{font-size:18px}
+
+.chat-msgs{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:10px}
+.chat-msg{display:flex;flex-direction:column;max-width:83%}
+.chat-msg-bot{align-self:flex-start}
+.chat-msg-user{align-self:flex-end;align-items:flex-end}
+.chat-msg-bubble{padding:9px 12px;border-radius:12px;font-size:12.5px;line-height:1.55;word-break:break-word}
+.chat-msg-bot .chat-msg-bubble{background:var(--s1);border:1px solid var(--bdr);border-bottom-left-radius:3px;color:var(--txt)}
+.chat-msg-user .chat-msg-bubble{background:var(--teal);color:#fff;border-bottom-right-radius:3px}
+.chat-msg-time{font-size:10px;color:var(--muted);margin-top:3px;padding:0 2px}
+.chat-typing-dots{display:flex;gap:5px;align-items:center;padding:11px 14px}
+.chat-typing-dots span{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:typeDot .9s ease infinite}
+.chat-typing-dots span:nth-child(2){animation-delay:.18s}
+.chat-typing-dots span:nth-child(3){animation-delay:.36s}
+@keyframes typeDot{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
+
+.chat-input-row{display:flex;gap:7px;padding:10px 12px;border-top:1px solid var(--bdr);flex-shrink:0;background:var(--s2)}
+.chat-text-input{flex:1;padding:8px 11px;font-size:12.5px;border:1.5px solid var(--bdr2);border-radius:var(--r);outline:none;font-family:var(--font);color:var(--txt);background:var(--s2);transition:border-color .15s}
+.chat-text-input:focus{border-color:var(--teal)}
+.chat-text-input::placeholder{color:var(--muted)}
+.chat-send-btn{padding:8px 11px;background:var(--teal);border:none;border-radius:var(--r);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s;flex-shrink:0}
+.chat-send-btn:hover{background:var(--teal-dk)}
+.chat-send-btn i{font-size:15px}
 </style>
 </head>
 <body>
@@ -356,7 +404,6 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
           <div class="store-lbl-row" id="store-lbl-row" style="display:none">
             <span class="store-tick-lbl" id="store-tick-lbl">Your store</span>
           </div>
-          <div class="plan-hint" id="plan-hint">Slide to see the right plan for your store</div>
           <div class="detect-wrap">
             <button class="detect-btn" onclick="detectProducts()">
               <i class="ti ti-refresh"></i> Auto-detect my product count
@@ -626,6 +673,13 @@ const PLAN_FEATURES_SHORT = {
   quote:      ['Custom product limit (200K+)','Dedicated onboarding session','Guaranteed SLA response time','Custom data integrations','Volume-based pricing'],
 };
 
+const PLAN_PILLS={
+  growth:    {label:'Most popular', cls:'pill-popular'},
+  pro:       {label:'Large store',  cls:'pill-large'},
+  enterprise:{label:'Massive store',cls:'pill-massive'},
+  quote:     {label:'Custom',       cls:'pill-custom'},
+};
+
 const ADDON_PRICES = { ymm:9.99, aiSearch:14.99, synonyms:4.99, b2bFilter:7.99 };
 const ADDON_LABELS = {
   ymm:'Year Make Model Search',
@@ -743,10 +797,6 @@ function onSlide(val){
     if(el) el.classList.toggle('lit',sliderPos>=m.pos);
   });
 
-  const badge=PLANS[newPlan].badgeTxt?` <span class="plan-badge-pill">${PLANS[newPlan].badgeTxt}</span>`:'';
-  document.getElementById('plan-hint').innerHTML=
-    `Recommended plan: <strong>${PLANS[newPlan].name}</strong>${badge} &nbsp;&nbsp; ${fmtCount(count)} products`;
-
   if(newPlan!==selPlan){
     selPlan=newPlan;
     cardFeatsOpen.sel=false;
@@ -768,19 +818,17 @@ function renderDualCards(){
 function renderFreeCard(){
   const p=PLANS.free;
   const isCurrent=USER_PLAN==='free';
-  const badge=isCurrent?`<div class="plan-current-badge">Current plan</div>`:'';
   const isOpen=cardFeatsOpen.free;
   const featItems=PLAN_FEATURES_SHORT.free.map(f=>
     `<div class="feat-collapse-item"><i class="ti ti-check"></i>${f}</div>`).join('');
   const cta=isCurrent
-    ?`<button class="card-cta noop" disabled><i class="ti ti-check"></i> Current plan</button>`
+    ?`<button class="card-cta noop" disabled><i class="ti ti-check"></i> You're on this plan</button>`
     :`<button class="card-cta downgrade" onclick="openPlanModal('free')"><i class="ti ti-arrow-down-right"></i> Downgrade to Free</button>`;
   return `
     <div class="plan-card free-card">
-      ${badge}
       <div class="pc-top-area"></div>
       <div class="pc-head">
-        <span class="pc-name">${p.name}</span>
+        <span class="pc-name">Free Plan</span>
       </div>
       <div class="pc-limit-wrap">
         <span class="pc-limit"><i class="ti ti-package"></i> Up to ${p.limitLabel} products</span>
@@ -820,7 +868,9 @@ function renderSelCard(){
   const isBillSwitch=isCurrent&&!isQuote&&billingMode!==USER_BILLING;
   const extraClass=isAnn&&!isQuote?' annual-card':'';
 
-  const badge=isCurrent?`<div class="plan-current-badge">Current plan</div>`:'';
+  const pill=PLAN_PILLS[selPlan]
+    ?`<span class="pc-plan-pill ${PLAN_PILLS[selPlan].cls}">${PLAN_PILLS[selPlan].label}</span>`
+    :'';
 
   const billingToggle=isQuote?'':`
     <div class="card-billing-inner">
@@ -864,10 +914,13 @@ function renderSelCard(){
 
   return `
     <div class="plan-card${isQuote?' quote-card':''}${extraClass}">
-      ${badge}${trialRibbon}
+      ${trialRibbon}
       <div class="pc-top-area">${billingToggle}</div>
       <div class="pc-head">
-        <span class="pc-name">${p.name}</span>
+        <div class="pc-name-wrap">
+          <span class="pc-name">${p.name} Plan</span>
+          ${pill}
+        </div>
         <div class="pc-price-block">${priceHTML}</div>
       </div>
       <div class="pc-limit-wrap">${limitLine}</div>
@@ -1159,17 +1212,49 @@ function openModal(title,bodyHTML,confirmLabel,isDanger,onConfirm){
   document.getElementById('plan-modal').style.display='flex';
 }
 
+function openDowngradeToFreeSurvey(){
+  const surveyHTML=`
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <p style="font-size:12.5px;color:var(--txt2);line-height:1.55">We're sorry to see you go. Your answers help us improve Findter.</p>
+      <div>
+        <div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:9px">1. What is your main reason for downgrading?</div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <label style="display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--txt2);cursor:pointer"><input type="checkbox" style="width:14px;height:14px;cursor:pointer;accent-color:var(--teal)"> Price / budget is too high</label>
+          <label style="display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--txt2);cursor:pointer"><input type="checkbox" style="width:14px;height:14px;cursor:pointer;accent-color:var(--teal)"> Not using enough of the features</label>
+          <label style="display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--txt2);cursor:pointer"><input type="checkbox" style="width:14px;height:14px;cursor:pointer;accent-color:var(--teal)"> Found a better alternative</label>
+          <label style="display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--txt2);cursor:pointer"><input type="checkbox" style="width:14px;height:14px;cursor:pointer;accent-color:var(--teal)"> Just testing — not ready to commit yet</label>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:9px">2. How satisfied were you with the plan overall?</div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <label style="display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--txt2);cursor:pointer"><input type="checkbox" style="width:14px;height:14px;cursor:pointer;accent-color:var(--teal)"> Very satisfied — it worked great</label>
+          <label style="display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--txt2);cursor:pointer"><input type="checkbox" style="width:14px;height:14px;cursor:pointer;accent-color:var(--teal)"> Somewhat satisfied — met some of my needs</label>
+          <label style="display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--txt2);cursor:pointer"><input type="checkbox" style="width:14px;height:14px;cursor:pointer;accent-color:var(--teal)"> Neutral — nothing stood out</label>
+          <label style="display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--txt2);cursor:pointer"><input type="checkbox" style="width:14px;height:14px;cursor:pointer;accent-color:var(--teal)"> Dissatisfied — had issues or missing features</label>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:6px">Additional feedback <span style="font-weight:400;color:var(--muted)">(optional)</span></div>
+        <textarea placeholder="Tell us what we could do better..." style="width:100%;height:72px;padding:8px 10px;font-size:12px;border:1.5px solid var(--bdr2);border-radius:var(--r);resize:none;outline:none;font-family:var(--font);color:var(--txt);background:var(--s2);transition:border-color .15s" onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='var(--bdr2)'"></textarea>
+      </div>
+    </div>`;
+  openModal('Before you go…',surveyHTML,'Submit & downgrade to Free',true,()=>applyPlanChange('free'));
+}
+
 function openPlanModal(targetPlan){
   const fromP=PLANS[USER_PLAN];
   const toP=PLANS[targetPlan];
   const curIdx=PLAN_ORDER.indexOf(USER_PLAN);
   const toIdx=PLAN_ORDER.indexOf(targetPlan);
 
+  if(targetPlan==='free'){
+    openDowngradeToFreeSurvey();
+    return;
+  }
+
   if(targetPlan==='quote'){
-    openModal('Contact Sales',
-      '<p>A member of our team will contact you within 24 hours to discuss a custom plan tailored to your needs.</p>',
-      'Send request',false,
-      ()=>showToast('Request sent! Our team will reach out shortly.','ok'));
+    openChatWithQuote();
     return;
   }
 
@@ -1301,6 +1386,70 @@ function showToast(msg,type='ok'){
   setTimeout(()=>{if(t.parentNode)t.remove();},3500);
 }
 
+/* CHAT */
+let chatIsOpen=false;
+
+function toggleChat(){
+  chatIsOpen=!chatIsOpen;
+  const box=document.getElementById('chat-box');
+  const icon=document.getElementById('chat-bubble-icon');
+  box.classList.toggle('open',chatIsOpen);
+  icon.className=chatIsOpen?'ti ti-x':'ti ti-message-circle';
+  if(chatIsOpen) document.getElementById('chat-text-input').focus();
+}
+
+function openChatWithQuote(){
+  if(!chatIsOpen) toggleChat();
+  const autoMsg="Hi! I'm interested in a custom plan for my store — we have over 200,000 products and I'd love to discuss pricing tailored to our scale.";
+  setTimeout(()=>{
+    chatAddMsg(autoMsg,'user');
+    chatShowTyping();
+    setTimeout(()=>{
+      chatHideTyping();
+      chatAddMsg("Thanks for getting in touch! 🎉 One of our team members will reach out within 24 hours to put together a custom quote for you. Feel free to share any extra details below in the meantime.",'bot');
+    },1500);
+  },300);
+}
+
+function chatAddMsg(text,from){
+  const msgs=document.getElementById('chat-msgs');
+  const now=new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+  const div=document.createElement('div');
+  div.className=`chat-msg chat-msg-${from}`;
+  div.innerHTML=`<div class="chat-msg-bubble">${text}</div><div class="chat-msg-time">${now}</div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop=msgs.scrollHeight;
+}
+
+function chatShowTyping(){
+  const msgs=document.getElementById('chat-msgs');
+  const div=document.createElement('div');
+  div.id='chat-typing';div.className='chat-msg chat-msg-bot';
+  div.innerHTML=`<div class="chat-msg-bubble chat-typing-dots"><span></span><span></span><span></span></div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop=msgs.scrollHeight;
+}
+
+function chatHideTyping(){
+  const el=document.getElementById('chat-typing');
+  if(el) el.remove();
+}
+
+function chatSend(){
+  const inp=document.getElementById('chat-text-input');
+  const val=inp.value.trim();
+  if(!val) return;
+  chatAddMsg(val,'user');
+  inp.value='';
+  chatShowTyping();
+  setTimeout(()=>{
+    chatHideTyping();
+    chatAddMsg("Thanks for your message! Our team will follow up with you shortly. 😊",'bot');
+  },1000);
+}
+
+function chatKeyDown(e){if(e.key==='Enter')chatSend();}
+
 /* INIT */
 buildMilestones();
 buildAddonList();
@@ -1313,6 +1462,39 @@ renderDualCards();
 renderPlanSummary();
 renderAddonSummary();renderAddonBanner();
 initCurrentPlanBanner();
+(function(){
+  const el=document.getElementById('chat-greeting-time');
+  if(el) el.textContent=new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+})();
 </script>
+
+<!-- CHAT BUBBLE -->
+<button class="chat-bubble-btn" id="chat-bubble-btn" onclick="toggleChat()" aria-label="Chat with us">
+  <i class="ti ti-message-circle" id="chat-bubble-icon"></i>
+</button>
+
+<!-- CHAT BOX -->
+<div class="chat-box" id="chat-box">
+  <div class="chat-hd">
+    <div class="chat-hd-left">
+      <div class="chat-hd-avatar"><i class="ti ti-headset"></i></div>
+      <div>
+        <div class="chat-hd-name">Findter Support</div>
+        <div class="chat-hd-status"><span class="chat-hd-dot"></span> Online — we reply within 24h</div>
+      </div>
+    </div>
+    <button class="chat-hd-close" onclick="toggleChat()"><i class="ti ti-x"></i></button>
+  </div>
+  <div class="chat-msgs" id="chat-msgs">
+    <div class="chat-msg chat-msg-bot">
+      <div class="chat-msg-bubble">Hi there! 👋 How can we help you today? Ask us anything about our plans, features, or pricing.</div>
+      <div class="chat-msg-time" id="chat-greeting-time"></div>
+    </div>
+  </div>
+  <div class="chat-input-row">
+    <input type="text" class="chat-text-input" id="chat-text-input" placeholder="Type a message..." onkeydown="chatKeyDown(event)"/>
+    <button class="chat-send-btn" onclick="chatSend()"><i class="ti ti-send"></i></button>
+  </div>
+</div>
 </body>
 </html>
