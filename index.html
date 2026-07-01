@@ -98,7 +98,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 
 .pc-price-block{text-align:right;flex-shrink:0}
 .pc-price-main{font-size:20px;font-weight:700;color:var(--txt);line-height:1.1}
-.pc-price-main sub{font-size:11px;font-weight:400;color:var(--muted)}
+.pc-price-unit{font-size:11px;font-weight:400;color:var(--muted);vertical-align:middle;margin-left:1px}
 .pc-price-was{font-size:10px;color:var(--muted);text-decoration:line-through;margin-top:2px}
 .pc-price-save{font-size:9px;font-weight:600;color:var(--teal-dk);margin-top:1px}
 
@@ -566,9 +566,9 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
       <div class="discount-msg" id="disc-msg" style="margin-top:6px;min-height:16px"></div>
       <div id="disc-summary-section" style="display:none"></div>
     </div>
-    <div class="modal-actions">
+    <div class="modal-actions" id="disc-modal-actions" style="display:none">
       <button class="modal-btn" onclick="closeDiscModal()">Cancel</button>
-      <button class="modal-btn modal-btn-primary" id="disc-confirm-btn" onclick="applyCardDiscount()">Apply</button>
+      <button class="modal-btn modal-btn-primary" id="disc-confirm-btn" onclick="processDiscPayment()">Process to Payment →</button>
     </div>
   </div>
 </div>
@@ -630,7 +630,7 @@ const PLANS = {
   starter:    { name:'Starter',    price:9.99,   annPx:8.29,   limitLabel:'3,000',    limitPct:3,   badge:'badge-starter', badgeTxt:'Starter'      },
   growth:     { name:'Growth',     price:19.99,  annPx:16.59,  limitLabel:'50,000',   limitPct:50,  badge:'badge-popular', badgeTxt:'Most popular'  },
   pro:        { name:'Pro',        price:49.99,  annPx:41.49,  limitLabel:'100,000',  limitPct:100, badge:'badge-pro',     badgeTxt:'All features'  },
-  enterprise: { name:'Enterprise', price:199.99, annPx:165.99, limitLabel:'200,000',  limitPct:100, badge:'badge-ent',     badgeTxt:'Large stores'  },
+  enterprise: { name:'Enterprise', price:79,     annPx:65.57,  limitLabel:'200,000',  limitPct:100, badge:'badge-ent',     badgeTxt:'Large stores'  },
   quote:      { name:'Quote',      price:null,   annPx:null,   limitLabel:'200,000+', limitPct:100, badge:'badge-quote',   badgeTxt:'Custom'        },
 };
 
@@ -888,10 +888,10 @@ function renderSelCard(){
   if(isQuote){
     priceHTML=`<div class="pc-price-main" style="font-size:17px;color:#86198f">Let's talk</div>`;
   } else if(isAnn){
-    priceHTML=`<div class="pc-price-main">$${p.annPx.toFixed(2)}<sub>/mo</sub></div>
-      <div class="pc-price-was">$${p.price.toFixed(2)}/mo</div>`;
+    priceHTML=`<div class="pc-price-main">$${(p.annPx*12).toFixed(2)}<span class="pc-price-unit">/yr</span></div>
+      <div class="pc-price-was">$${(p.price*12).toFixed(2)}/yr</div>`;
   } else {
-    priceHTML=`<div class="pc-price-main">$${p.price.toFixed(2)}<sub>/mo</sub></div>`;
+    priceHTML=`<div class="pc-price-main">$${p.price.toFixed(2)}<span class="pc-price-unit">/mo</span></div>`;
   }
 
   const featItems=(PLAN_FEATURES_SHORT[selPlan]||[]).map(f=>
@@ -1162,25 +1162,27 @@ function openModal(title,bodyHTML,confirmLabel,isDanger,onConfirm){
 }
 
 function openDowngradeToFreeSurvey(){
+  const cb='width:14px;height:14px;cursor:pointer;accent-color:var(--teal)';
+  const lbl='display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--txt2);cursor:pointer';
   const surveyHTML=`
     <div style="display:flex;flex-direction:column;gap:16px">
       <p style="font-size:12.5px;color:var(--txt2);line-height:1.55">We're sorry to see you go. Your answers help us improve Findter.</p>
       <div>
-        <div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:9px">1. What is your main reason for downgrading?</div>
+        <div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:9px">1. What is your main reason for downgrading? <span style="color:#dc2626;font-weight:700">*</span></div>
         <div style="display:flex;flex-direction:column;gap:7px">
-          <label style="display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--txt2);cursor:pointer"><input type="checkbox" style="width:14px;height:14px;cursor:pointer;accent-color:var(--teal)"> Price / budget is too high</label>
-          <label style="display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--txt2);cursor:pointer"><input type="checkbox" style="width:14px;height:14px;cursor:pointer;accent-color:var(--teal)"> Not using enough of the features</label>
-          <label style="display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--txt2);cursor:pointer"><input type="checkbox" style="width:14px;height:14px;cursor:pointer;accent-color:var(--teal)"> Found a better alternative</label>
-          <label style="display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--txt2);cursor:pointer"><input type="checkbox" style="width:14px;height:14px;cursor:pointer;accent-color:var(--teal)"> Just testing — not ready to commit yet</label>
+          <label style="${lbl}"><input class="surv-q1" type="checkbox" style="${cb}" onchange="checkSurveyReq()"> Price / budget is too high</label>
+          <label style="${lbl}"><input class="surv-q1" type="checkbox" style="${cb}" onchange="checkSurveyReq()"> Not using enough of the features</label>
+          <label style="${lbl}"><input class="surv-q1" type="checkbox" style="${cb}" onchange="checkSurveyReq()"> Found a better alternative</label>
+          <label style="${lbl}"><input class="surv-q1" type="checkbox" style="${cb}" onchange="checkSurveyReq()"> Just testing — not ready to commit yet</label>
         </div>
       </div>
       <div>
-        <div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:9px">2. How satisfied were you with the plan overall?</div>
+        <div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:9px">2. How satisfied were you with the plan overall? <span style="color:#dc2626;font-weight:700">*</span></div>
         <div style="display:flex;flex-direction:column;gap:7px">
-          <label style="display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--txt2);cursor:pointer"><input type="checkbox" style="width:14px;height:14px;cursor:pointer;accent-color:var(--teal)"> Very satisfied — it worked great</label>
-          <label style="display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--txt2);cursor:pointer"><input type="checkbox" style="width:14px;height:14px;cursor:pointer;accent-color:var(--teal)"> Somewhat satisfied — met some of my needs</label>
-          <label style="display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--txt2);cursor:pointer"><input type="checkbox" style="width:14px;height:14px;cursor:pointer;accent-color:var(--teal)"> Neutral — nothing stood out</label>
-          <label style="display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--txt2);cursor:pointer"><input type="checkbox" style="width:14px;height:14px;cursor:pointer;accent-color:var(--teal)"> Dissatisfied — had issues or missing features</label>
+          <label style="${lbl}"><input class="surv-q2" type="checkbox" style="${cb}" onchange="checkSurveyReq()"> Very satisfied — it worked great</label>
+          <label style="${lbl}"><input class="surv-q2" type="checkbox" style="${cb}" onchange="checkSurveyReq()"> Somewhat satisfied — met some of my needs</label>
+          <label style="${lbl}"><input class="surv-q2" type="checkbox" style="${cb}" onchange="checkSurveyReq()"> Neutral — nothing stood out</label>
+          <label style="${lbl}"><input class="surv-q2" type="checkbox" style="${cb}" onchange="checkSurveyReq()"> Dissatisfied — had issues or missing features</label>
         </div>
       </div>
       <div>
@@ -1189,6 +1191,19 @@ function openDowngradeToFreeSurvey(){
       </div>
     </div>`;
   openModal('Before you go…',surveyHTML,'Submit & downgrade to Free',true,()=>applyPlanChange('free'));
+  const btn=document.getElementById('modal-confirm-btn');
+  if(btn){btn.disabled=true;btn.style.opacity='0.4';btn.style.cursor='not-allowed';}
+}
+
+function checkSurveyReq(){
+  const q1=Array.from(document.querySelectorAll('.surv-q1')).some(c=>c.checked);
+  const q2=Array.from(document.querySelectorAll('.surv-q2')).some(c=>c.checked);
+  const btn=document.getElementById('modal-confirm-btn');
+  if(!btn) return;
+  const ok=q1&&q2;
+  btn.disabled=!ok;
+  btn.style.opacity=ok?'1':'0.4';
+  btn.style.cursor=ok?'pointer':'not-allowed';
 }
 
 function openPlanModal(targetPlan){
@@ -1417,7 +1432,9 @@ function openDiscountModal(plan){
   if(input){input.value='';}
   if(msg){msg.textContent='';msg.className='discount-msg';}
   if(summary){summary.style.display='none';summary.innerHTML='';}
-  if(btn){btn.textContent='Apply';btn.onclick=applyCardDiscount;}
+  if(btn){btn.textContent='Process to Payment →';btn.onclick=processDiscPayment;}
+  const actions=document.getElementById('disc-modal-actions');
+  if(actions) actions.style.display='none';
   document.getElementById('disc-modal').style.display='flex';
   setTimeout(()=>{if(input)input.focus();},60);
 }
@@ -1436,8 +1453,7 @@ function applyCardDiscount(){
   msg.textContent=`Code "${code}" applied — ${pct}% off!`;msg.className='discount-msg ok';
   renderDiscSummary(pct);
   document.getElementById('disc-summary-section').style.display='block';
-  const btn=document.getElementById('disc-confirm-btn');
-  if(btn){btn.textContent='Process to Payment →';btn.onclick=processDiscPayment;}
+  document.getElementById('disc-modal-actions').style.display='flex';
 }
 
 function renderDiscSummary(pct){
