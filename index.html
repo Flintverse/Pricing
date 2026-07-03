@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Findter Subscription</title>
+<title>Findter Pricing</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -23,6 +23,15 @@ html,body{font-family:var(--font);background:#f3f4f6;color:var(--txt);min-height
 .wrap{max-width:1060px;margin:0 auto;padding:2rem 1.25rem 3rem}
 .pg-title{font-size:18px;font-weight:600;margin-bottom:.2rem}
 .pg-sub{font-size:13px;color:var(--txt2);margin-bottom:1rem}
+
+/* OPTIONS BAR */
+.opts-bar{background:var(--s1);border:1.5px solid var(--bdr);border-radius:var(--r);padding:8px 14px;margin-bottom:1.1rem;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.opts-bar-label{font-size:10.5px;font-weight:700;color:var(--muted);display:flex;align-items:center;gap:5px;text-transform:uppercase;letter-spacing:.06em;flex-shrink:0}
+.opts-bar-field{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--txt2)}
+.opts-bar-field label{white-space:nowrap;font-weight:500}
+.opts-bar-field input[type=number]{padding:5px 9px;border:1.5px solid var(--bdr2);border-radius:6px;font-size:12.5px;font-family:var(--font);color:var(--txt);background:var(--s2);width:130px;outline:none;appearance:textfield;-moz-appearance:textfield}
+.opts-bar-field input[type=number]::-webkit-outer-spin-button,.opts-bar-field input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;appearance:none;margin:0}
+.opts-bar-field input[type=number]:focus{border-color:var(--teal)}
 
 /* LAYOUT */
 .root{display:grid;grid-template-columns:1fr 288px;gap:1.25rem;align-items:start}
@@ -358,14 +367,18 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 <body>
 <div class="wrap">
 
-  <h1 class="pg-title">Subscription</h1>
-  <p class="pg-sub">Choose a plan and features that fits your store.</p>
-
-  <!-- TAB NAV -->
-  <div class="tab-nav">
-    <button class="tab-btn active" id="tab-pricing-btn" onclick="switchTab('pricing')">Pricing plan</button>
-    <button class="tab-btn" id="tab-addons-btn" onclick="switchTab('addons')">Advanced add-ons</button>
+  <!-- OPTIONS BAR -->
+  <div class="opts-bar">
+    <span class="opts-bar-label"><i class="ti ti-settings-2"></i> Options</span>
+    <div class="opts-bar-field">
+      <label for="opt-store-count">Actual store product count:</label>
+      <input type="number" id="opt-store-count" min="0" placeholder="e.g. 4800"
+             oninput="setStoreCount(this.value)"/>
+    </div>
   </div>
+
+  <h1 class="pg-title">Pricing</h1>
+  <p class="pg-sub">Choose a plan and features that fits your store.</p>
 
   <!-- CURRENT PLAN BANNER -->
   <div class="cur-banner">
@@ -374,42 +387,32 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
         <i class="ti ti-circle-check-filled"></i>
         <div>
           <div class="cur-banner-plan">You are currently on the <strong id="cb-plan-name">Free plan</strong></div>
-          <div class="cur-banner-expiry" id="cb-plan-expiry" style="display:none">
+          <div class="cur-banner-expiry" id="cb-plan-expiry">
             <i class="ti ti-calendar-event"></i>
-            <span id="cb-expiry-txt"></span>
+            <span id="cb-expiry-txt">Trial expires in 14 days</span>
           </div>
         </div>
       </div>
-      <span class="cur-banner-badge">Active</span>
     </div>
     <div class="cur-banner-lim">
       <div class="cur-banner-lim-hdr">
-        <span>Product limit on current plan</span>
+        <span>Product count on current plan</span>
         <strong id="cb-lim-lbl">300 products</strong>
       </div>
       <div class="lim-track"><div class="lim-fill" id="cb-lim-fill" style="width:1%"></div></div>
+      <div id="cb-lim-warn" style="display:none;margin-top:6px;padding:6px 10px;background:#fffbeb;border:1px solid #fcd34d;border-radius:var(--r);font-size:11.5px;font-weight:500;color:#92400e"></div>
     </div>
   </div>
 
-  <!-- ADDON STATUS BANNER -->
-  <div class="addon-banner" id="addon-banner" style="display:none">
-    <div class="addon-banner-left">
-      <i class="ti ti-sparkles"></i>
-      <div>
-        <div class="addon-banner-title">Active add-ons</div>
-        <div id="addon-banner-items"></div>
-      </div>
-    </div>
-  </div>
+  <div style="height:1px;background:var(--bdr);margin:0 0 1.25rem"></div>
 
-  <!-- == TAB 1: PRICING PLAN == -->
   <div id="tab-pricing-content">
     <div class="root" style="grid-template-columns:1fr">
       <div class="left">
 
         <!-- SLIDER -->
         <div class="slider-section">
-          <div class="slider-label">Choose your store product amount</div>
+          <div class="slider-label">Choose future plan</div>
           <div class="slider-wrap" id="slider-wrap">
             <div class="track-fill" id="track-fill" style="width:0%"></div>
             <div class="count-pill" id="count-pill" style="left:0%">0 products</div>
@@ -467,7 +470,6 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 
   </div><!-- /#tab-pricing-content -->
 
-  <!-- == TAB 2: ADVANCED ADD-ONS == -->
   <div id="tab-addons-content" style="display:none">
     <div class="root">
       <div class="left">
@@ -591,12 +593,13 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 <script>
 /* DATA */
 const PLAN_COUNT_RANGES = {
-  free:       [0,       300     ],
-  starter:    [301,     3000    ],
-  growth:     [3001,    50000   ],
-  pro:        [50001,   100000  ],
-  enterprise: [100001,  200000  ],
-  quote:      [200001,  Infinity],
+  free:         [0,       300     ],
+  starter:      [301,     3000    ],
+  plus:         [3001,    50000   ],
+  growth:       [50001,   100000  ],
+  professional: [100001,  150000  ],
+  business:     [150001,  200000  ],
+  enterprise:   [200001,  Infinity],
 };
 
 const ANCHORS = [
@@ -621,60 +624,61 @@ const MILESTONE_DOTS = [
   { pos: 32, label:'3K'    },
   { pos: 64, label:'50K'   },
   { pos: 80, label:'100K'  },
-  { pos: 96, label:'200K'  },
-  { pos:100, label:'200K+' },
+  { pos: 88, label:'150K'  },
+  { pos: 96, label:'200K+' },
 ];
 
 const PLANS = {
-  free:       { name:'Free',       price:0,      annPx:0,      limitLabel:'300',      limitPct:1,   badge:'badge-free',    badgeTxt:'Free forever' },
-  starter:    { name:'Starter',    price:9.99,   annPx:8.29,   limitLabel:'3,000',    limitPct:3,   badge:'badge-starter', badgeTxt:'Starter'      },
-  growth:     { name:'Growth',     price:19.99,  annPx:16.59,  limitLabel:'50,000',   limitPct:50,  badge:'badge-popular', badgeTxt:'Most popular'  },
-  pro:        { name:'Pro',        price:49.99,  annPx:41.49,  limitLabel:'100,000',  limitPct:100, badge:'badge-pro',     badgeTxt:'All features'  },
-  enterprise: { name:'Enterprise', price:79,     annPx:65.57,  limitLabel:'200,000',  limitPct:100, badge:'badge-ent',     badgeTxt:'Large stores'  },
-  quote:      { name:'Quote',      price:null,   annPx:null,   limitLabel:'200,000+', limitPct:100, badge:'badge-quote',   badgeTxt:'Custom'        },
+  free:         { name:'Free',         price:0,    annPx:0,     limitLabel:'300',      limitPct:1   },
+  starter:      { name:'Starter',      price:9,    annPx:7.47,  limitLabel:'3,000',    limitPct:3   },
+  plus:         { name:'Plus',         price:19,   annPx:15.77, limitLabel:'50,000',   limitPct:50  },
+  growth:       { name:'Growth',       price:49,   annPx:40.67, limitLabel:'100,000',  limitPct:100 },
+  professional: { name:'Professional', price:79,   annPx:65.57, limitLabel:'150,000',  limitPct:100 },
+  business:     { name:'Business',     price:99,   annPx:82.17, limitLabel:'200,000',  limitPct:100 },
+  enterprise:   { name:'Enterprise',   price:null, annPx:null,  limitLabel:'200,000+', limitPct:100 },
 };
 
 const PLAN_FEATURES = {
-  free:       { inc:['Basic search','Up to 3 filters'],
-                exc:['Metafield indexing','Swatch images','Storefront sorting','Variant filter'] },
-  starter:    { inc:['Metafield indexing','Swatch images','Filter count values'],
-                exc:['Storefront sorting','Variant filter','Advanced variant filter'] },
-  growth:     { inc:['Everything in Starter','Storefront sorting','Variant filter','Market currency'],
-                exc:['Advanced variant filter','Multi-source filter'] },
-  pro:        { inc:['Everything in Growth','Advanced variant filter','Multi-source filter','Collection search','OR-mode & Market filters'],
-                exc:[] },
-  enterprise: { inc:['Everything in Pro','Dedicated support','Custom indexing limits','Priority SLA'],
-                exc:[] },
-  quote:      { inc:['Custom product limit','Dedicated onboarding','SLA guarantee','Custom integrations','Volume pricing'],
-                exc:[] },
+  free:         { inc:['Basic search','Up to 3 filters'],
+                  exc:['Metafield indexing','Swatch images','Storefront sorting','Variant filter'] },
+  starter:      { inc:['Metafield indexing','Swatch images','Filter count values'],
+                  exc:['Storefront sorting','Variant filter','Advanced variant filter'] },
+  plus:         { inc:['Everything in Starter','Storefront sorting','Variant filter','Market currency'],
+                  exc:['Advanced variant filter','Multi-source filter'] },
+  growth:       { inc:['Everything in Plus','Advanced variant filter','Multi-source filter','Collection search','OR-mode & Market filters'],
+                  exc:[] },
+  professional: { inc:['Everything in Growth','Dedicated account manager','Custom indexing limits','Priority SLA'],
+                  exc:[] },
+  business:     { inc:['Everything in Professional','Advanced analytics','White-glove onboarding','Bulk API access'],
+                  exc:[] },
+  enterprise:   { inc:['Custom product limit','Dedicated onboarding','SLA guarantee','Custom integrations','Volume pricing'],
+                  exc:[] },
 };
 
 const PLAN_DESC = {
-  free:       'Basic filtering to get started at no cost.',
-  starter:    'Essential filters for small stores just getting started.',
-  growth:     'Variant filtering and sorting for growing catalogs.',
-  pro:        'Every feature unlocked - OR-mode, multi-source, and more.',
-  enterprise: 'Full power with dedicated support and custom limits.',
-  quote:      'Custom pricing for stores with more than 200,000 products.',
+  free:         'Basic filtering to get started at no cost.',
+  starter:      'Essential filters for small stores just getting started.',
+  plus:         'Variant filtering and sorting for growing catalogs.',
+  growth:       'Every filter feature unlocked for high-volume stores.',
+  professional: 'Advanced features with dedicated account support.',
+  business:     'Full power for large-scale store operations.',
+  enterprise:   'Custom pricing for stores with more than 200,000 products.',
 };
 
-const PLAN_ORDER = ['free','starter','growth','pro','enterprise','quote'];
+const PLAN_ORDER = ['free','starter','plus','growth','professional','business','enterprise'];
 
 const PLAN_FEATURES_SHORT = {
-  free:       ['Basic product search','Up to 3 custom filters','Manual filter setup','Community forum support','Standard indexing speed'],
-  starter:    ['Metafield-based filters','Swatch image support','Filter count display','Email support (48h)','Up to 10 custom filters'],
-  growth:     ['Everything in Starter','Storefront sorting rules','Variant-level filtering','Multi-currency markets','Priority email support (24h)'],
-  pro:        ['Everything in Growth','Advanced variant filters','Multi-source filter merging','Collection-level search','OR-mode & Market filters'],
-  enterprise: ['Everything in Pro','Dedicated account manager','Custom indexing limits','Priority SLA (< 4h response)','Custom integration support'],
-  quote:      ['Custom product limit (200K+)','Dedicated onboarding session','Guaranteed SLA response time','Custom data integrations','Volume-based pricing'],
+  free:         ['Basic product search','Up to 3 custom filters','Manual filter setup','Community forum support','Standard indexing speed'],
+  starter:      ['Metafield-based filters','Swatch image support','Filter count display','Email support (48h)','Up to 10 custom filters'],
+  plus:         ['Everything in Starter','Storefront sorting rules','Variant-level filtering','Multi-currency markets','Priority email support (24h)'],
+  growth:       ['Everything in Plus','Advanced variant filters','Multi-source filter merging','Collection-level search','OR-mode & Market filters'],
+  professional: ['Everything in Growth','Dedicated account manager','Custom indexing limits','Priority SLA (< 4h response)','Custom integration support'],
+  business:     ['Everything in Professional','Advanced analytics dashboard','White-glove onboarding','Bulk API access','Volume discounts'],
+  enterprise:   ['Custom product limit (200K+)','Dedicated onboarding session','Guaranteed SLA response time','Custom data integrations','Volume-based pricing'],
 };
 
-const PLAN_PILLS={
-  growth:    {label:'Most popular', cls:'pill-popular'},
-  pro:       {label:'Large store',  cls:'pill-large'},
-  enterprise:{label:'Massive store',cls:'pill-massive'},
-  quote:     {label:'Custom',       cls:'pill-custom'},
-};
+const PLAN_PILLS={};
+const PLAN_LIMITS={free:300,starter:3000,plus:50000,growth:100000,professional:150000,business:200000,enterprise:Infinity};
 
 const ADDON_PRICES = { ymm:9.99, aiSearch:14.99, synonyms:4.99, b2bFilter:7.99 };
 const ADDON_LABELS = {
@@ -706,6 +710,7 @@ let pendingAction   = null;
 let cardDiscountPct = 0;
 let pendingDiscPlan = null;
 let pendingDiscBill = null;
+let storeProductCount = 0;
 
 /* HELPERS */
 function countForPos(pos){
@@ -723,7 +728,7 @@ function planForCount(count){
   for(const [key,[lo,hi]] of Object.entries(PLAN_COUNT_RANGES)){
     if(count>=lo&&count<=hi) return key;
   }
-  return 'quote';
+  return 'enterprise';
 }
 
 function posForCount(target){
@@ -856,7 +861,7 @@ function renderSelCard(){
   }
 
   const p=PLANS[selPlan];
-  const isQuote=selPlan==='quote';
+  const isQuote=selPlan==='enterprise';
   const isAnn=billingMode==='annual'&&!isQuote;
   const isCurrent=selPlan===USER_PLAN;
   const curIdx=PLAN_ORDER.indexOf(USER_PLAN);
@@ -871,13 +876,12 @@ function renderSelCard(){
     ?`<button class="card-discount-link" onclick="openDiscountModal('${selPlan}')">Have a discount code?</button>`
     :'';
 
-  const pill=PLAN_PILLS[selPlan]
-    ?`<span class="pc-plan-pill ${PLAN_PILLS[selPlan].cls}">${PLAN_PILLS[selPlan].label}</span>`
-    :'';
+  const pill='';
 
+  const monthlyLocked=USER_BILLING==='annual';
   const billingToggle=isQuote?'':`
     <div class="card-billing-inner">
-      <button class="card-bill-tab${billingMode==='monthly'?' active':''}" onclick="selectBilling('monthly')">Monthly</button>
+      <button class="card-bill-tab${billingMode==='monthly'?' active':''}" onclick="selectBilling('monthly')"${monthlyLocked?' style="opacity:.45;cursor:not-allowed"':''}>Monthly</button>
       <button class="card-bill-tab${billingMode==='annual'?' active':''}" onclick="selectBilling('annual')">Annually<span class="card-bill-save">-17%</span></button>
     </div>`;
 
@@ -903,7 +907,7 @@ function renderSelCard(){
 
   let cta='';
   if(isQuote){
-    cta=`<button class="card-cta upgrade" onclick="openPlanModal('quote')"><i class="ti ti-mail"></i> Contact us for a quote</button>`;
+    cta=`<button class="card-cta upgrade" onclick="openPlanModal('enterprise')"><i class="ti ti-mail"></i> Contact us for a quote</button>`;
   } else if(isBillSwitch){
     const lbl=billingMode==='annual'?'Annually':'Monthly';
     cta=`<button class="card-cta upgrade" onclick="switchBillingModal('${billingMode}')">Switch to ${lbl}</button>`;
@@ -955,6 +959,7 @@ function toggleCardFeats(which){
 }
 
 function selectBilling(mode){
+  if(USER_BILLING==='annual'&&mode==='monthly') return;
   billingMode=mode;
   renderDualCards();
   renderPlanSummary();
@@ -1217,34 +1222,36 @@ function openPlanModal(targetPlan){
     return;
   }
 
-  if(targetPlan==='quote'){
+  if(targetPlan==='enterprise'){
     openChatWithQuote();
     return;
   }
 
   const isUp=toIdx>curIdx;
-  let body='';
   if(isUp){
-    const billingNote=billingMode==='annual'&&toP.annPx
-      ?`$${(toP.annPx*12).toFixed(2)}/year ($${toP.annPx.toFixed(2)}/mo billed annually)`
-      :`$${toP.price.toFixed(2)}/month`;
-    const trial=fromP.price===0?'<p>Your 14-day free trial starts today - no charge until it ends.</p>':'';
-    body=`<p>Upgrading from <strong>${fromP.name}</strong> to <strong>${toP.name}</strong>.</p>
-          <p>New rate: <strong>${billingNote}</strong></p>${trial}`;
+    const isAnn=billingMode==='annual'&&toP.annPx;
+    const raw=isAnn?toP.annPx*12:toP.price;
+    const suffix=isAnn?'/yr':'/mo';
+    const trial=fromP.price===0?`<p style="font-size:12px;color:var(--txt2);margin-top:.5rem">✓ Your 14-day free trial starts today — no charge until it ends.</p>`:'';
+    const body=`
+      <div style="background:var(--s1);border-radius:var(--r);border:1px solid var(--bdr);padding:12px 14px;margin-bottom:.5rem">
+        <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:10px">Order summary</div>
+        <div style="display:flex;justify-content:space-between;font-size:12.5px;padding:4px 0;color:var(--txt2)">
+          <span>${toP.name} Plan${isAnn?' (annual)':''}</span>
+          <span style="font-weight:500;color:var(--txt)">$${raw.toFixed(2)}${suffix}</span>
+        </div>
+        <div style="height:1px;background:var(--bdr2);margin:8px 0"></div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline">
+          <span style="font-size:13px;font-weight:600;color:var(--txt)">Total</span>
+          <span style="font-size:18px;font-weight:700;color:var(--txt)">$${raw.toFixed(2)}<span style="font-size:11px;font-weight:400;color:var(--muted)">${suffix}</span></span>
+        </div>
+      </div>${trial}`;
+    openModal(`Upgrade to ${toP.name}`,body,'Process to Payment →',false,()=>applyPlanChange(targetPlan));
   } else {
-    const note=targetPlan==='free'
-      ?'<p>Your paid features remain active until the end of the current billing period, then revert to Free.</p>'
-      :'<p>Your current plan stays active until the end of the billing period.</p>';
-    body=`<p>Downgrading from <strong>${fromP.name}</strong> to <strong>${toP.name}</strong>.</p>${note}`;
+    const note='<p>Your current plan stays active until the end of the billing period.</p>';
+    const body=`<p>Downgrading from <strong>${fromP.name}</strong> to <strong>${toP.name}</strong>.</p>${note}`;
+    openModal(`Downgrade to ${toP.name}`,body,'Confirm downgrade',true,()=>applyPlanChange(targetPlan));
   }
-
-  openModal(
-    isUp?`Upgrade to ${toP.name}`:`Downgrade to ${toP.name}`,
-    body,
-    isUp?'Confirm upgrade':'Confirm downgrade',
-    !isUp,
-    ()=>applyPlanChange(targetPlan)
-  );
 }
 
 function applyPlanChange(targetPlan){
@@ -1252,7 +1259,7 @@ function applyPlanChange(targetPlan){
   const curIdx=PLAN_ORDER.indexOf(USER_PLAN);
   const isUp=selIdx>curIdx;
   USER_PLAN=targetPlan;USER_BILLING=billingMode;
-  if(USER_PLAN!=='free'&&USER_PLAN!=='quote'){
+  if(USER_PLAN!=='free'&&USER_PLAN!=='enterprise'){
     const now=new Date();
     planExpiresDate=billingMode==='annual'
       ?new Date(now.getFullYear()+1,now.getMonth(),now.getDate())
@@ -1286,24 +1293,65 @@ function initCurrentPlanBanner(){
   const cur=PLANS[USER_PLAN];
   const nameEl=document.getElementById('cb-plan-name');
   if(nameEl) nameEl.textContent=cur.name+' plan';
+
   const expiryRow=document.getElementById('cb-plan-expiry');
   const expiryTxt=document.getElementById('cb-expiry-txt');
   if(expiryRow&&expiryTxt){
     if(planExpiresDate&&cur.price!==0&&cur.price!==null){
       const fmt=planExpiresDate.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
       expiryTxt.textContent=`Plan expires on: ${fmt}`;
-      expiryRow.style.display='flex';
-    } else expiryRow.style.display='none';
+    } else {
+      const trialEnd=new Date();trialEnd.setDate(trialEnd.getDate()+14);
+      const msLeft=trialEnd-new Date();
+      const daysLeft=Math.max(0,Math.ceil(msLeft/(1000*60*60*24)));
+      expiryTxt.textContent=`Trial expires in ${daysLeft} days`;
+    }
+    expiryRow.style.display='flex';
   }
+
   const fillEl=document.getElementById('cb-lim-fill');
   const lblEl=document.getElementById('cb-lim-lbl');
-  if(fillEl) fillEl.style.width=cur.limitPct+'%';
-  if(lblEl) lblEl.textContent=cur.limitLabel+' products';
+  const warnEl=document.getElementById('cb-lim-warn');
+  const planLim=PLAN_LIMITS[USER_PLAN]||300;
+
+  if(storeProductCount>0&&planLim!==Infinity){
+    const used=storeProductCount;
+    const pct=Math.min(100,Math.round((used/planLim)*100));
+    const exceeded=used>planLim;
+    if(fillEl){fillEl.style.width=pct+'%';fillEl.style.background=exceeded?'#f59e0b':'var(--teal)';}
+    if(lblEl) lblEl.textContent=`${used.toLocaleString()} / ${planLim.toLocaleString()} products`;
+    if(warnEl){
+      if(exceeded){
+        const rec=planForCount(used);
+        warnEl.textContent=`⚠ Your store exceeds the current plan limit. Recommend upgrading to the ${PLANS[rec].name} plan.`;
+        warnEl.style.display='block';
+      } else { warnEl.style.display='none'; }
+    }
+  } else {
+    if(fillEl){fillEl.style.width=cur.limitPct+'%';fillEl.style.background='var(--teal)';}
+    if(lblEl) lblEl.textContent=cur.limitLabel+' products';
+    if(warnEl) warnEl.style.display='none';
+  }
+}
+
+/* OPTIONS BAR */
+const STORE_COUNT_KEY='findter_store_count';
+function setStoreCount(val){
+  const n=parseInt(val,10);
+  if(isNaN(n)||n<0){localStorage.removeItem(STORE_COUNT_KEY);storeProductCount=0;}
+  else{storeProductCount=n;localStorage.setItem(STORE_COUNT_KEY,String(n));}
+  initCurrentPlanBanner();
 }
 
 /* DETECT PRODUCTS */
 function detectProducts(){
-  const storeCount=5000;
+  const result=document.getElementById('detect-result');
+  if(!storeProductCount){
+    result.textContent='Set your store product count in the options bar above first.';
+    result.style.display='inline';
+    return;
+  }
+  const storeCount=storeProductCount;
   const pos=posForCount(storeCount);
   const slider=document.getElementById('prod-slider');
   if(slider){slider.value=pos;onSlide(pos);}
@@ -1313,10 +1361,15 @@ function detectProducts(){
   const row=document.getElementById('store-lbl-row');
   if(lbl) lbl.style.left=pos+'%';
   if(row) row.style.display='block';
-  const actualCount=countForPos(pos);
-  const result=document.getElementById('detect-result');
-  const rec=planForCount(actualCount);
-  result.textContent=`${fmtCount(actualCount)} products detected -> ${PLANS[rec].name} recommended`;
+  initCurrentPlanBanner();
+  const rec=planForCount(storeCount);
+  const curOrd=PLAN_ORDER.indexOf(USER_PLAN);
+  const recOrd=PLAN_ORDER.indexOf(rec);
+  if(USER_PLAN!=='free'&&curOrd>=recOrd){
+    result.textContent=`${fmtCount(storeCount)} products — you're on a great fit plan ✓`;
+  } else {
+    result.textContent=`${fmtCount(storeCount)} products detected → ${PLANS[rec].name} recommended`;
+  }
   result.style.display='inline';
 }
 
@@ -1501,7 +1554,13 @@ function discModalBgClick(e){
 buildMilestones();
 buildAddonList();
 (function(){
-  const initPos=posForCount(5000);
+  const saved=parseInt(localStorage.getItem(STORE_COUNT_KEY)||'',10);
+  if(!isNaN(saved)&&saved>0){
+    storeProductCount=saved;
+    const inp=document.getElementById('opt-store-count');
+    if(inp) inp.value=saved;
+  }
+  const initPos=storeProductCount?posForCount(storeProductCount):0;
   const slider=document.getElementById('prod-slider');
   if(slider){slider.value=initPos;onSlide(initPos);}
 })();
