@@ -595,10 +595,10 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 const PLAN_COUNT_RANGES = {
   free:         [0,       300     ],
   starter:      [301,     3000    ],
-  plus:         [3001,    50000   ],
-  growth:       [50001,   100000  ],
-  professional: [100001,  150000  ],
-  business:     [150001,  200000  ],
+  growth:       [3001,    50000   ],
+  professional: [50001,   100000  ],
+  business:     [100001,  150000  ],
+  advanced:     [150001,  200000  ],
   enterprise:   [200001,  Infinity],
 };
 
@@ -631,10 +631,10 @@ const MILESTONE_DOTS = [
 const PLANS = {
   free:         { name:'Free',         price:0,    annPx:0,     limitLabel:'300',      limitPct:1   },
   starter:      { name:'Starter',      price:9,    annPx:7.47,  limitLabel:'3,000',    limitPct:3   },
-  plus:         { name:'Plus',         price:19,   annPx:15.77, limitLabel:'50,000',   limitPct:50  },
-  growth:       { name:'Growth',       price:49,   annPx:40.67, limitLabel:'100,000',  limitPct:100 },
-  professional: { name:'Professional', price:79,   annPx:65.57, limitLabel:'150,000',  limitPct:100 },
-  business:     { name:'Business',     price:99,   annPx:82.17, limitLabel:'200,000',  limitPct:100 },
+  growth:       { name:'Growth',       price:19,   annPx:15.77, limitLabel:'50,000',   limitPct:50  },
+  professional: { name:'Professional', price:49,   annPx:40.67, limitLabel:'100,000',  limitPct:100 },
+  business:     { name:'Business',     price:79,   annPx:65.57, limitLabel:'150,000',  limitPct:100 },
+  advanced:     { name:'Advanced',     price:99,   annPx:82.17, limitLabel:'200,000',  limitPct:100 },
   enterprise:   { name:'Enterprise',   price:null, annPx:null,  limitLabel:'200,000+', limitPct:100 },
 };
 
@@ -643,13 +643,13 @@ const PLAN_FEATURES = {
                   exc:['Metafield indexing','Swatch images','Storefront sorting','Variant filter'] },
   starter:      { inc:['Metafield indexing','Swatch images','Filter count values'],
                   exc:['Storefront sorting','Variant filter','Advanced variant filter'] },
-  plus:         { inc:['Everything in Starter','Storefront sorting','Variant filter','Market currency'],
+  growth:       { inc:['Everything in Starter','Storefront sorting','Variant filter','Market currency'],
                   exc:['Advanced variant filter','Multi-source filter'] },
-  growth:       { inc:['Everything in Plus','Advanced variant filter','Multi-source filter','Collection search','OR-mode & Market filters'],
+  professional: { inc:['Everything in Growth','Advanced variant filter','Multi-source filter','Collection search','OR-mode & Market filters'],
                   exc:[] },
-  professional: { inc:['Everything in Growth','Dedicated account manager','Custom indexing limits','Priority SLA'],
+  business:     { inc:['Everything in Professional','Dedicated account manager','Custom indexing limits','Priority SLA'],
                   exc:[] },
-  business:     { inc:['Everything in Professional','Advanced analytics','White-glove onboarding','Bulk API access'],
+  advanced:     { inc:['Everything in Business','Advanced analytics','White-glove onboarding','Bulk API access'],
                   exc:[] },
   enterprise:   { inc:['Custom product limit','Dedicated onboarding','SLA guarantee','Custom integrations','Volume pricing'],
                   exc:[] },
@@ -658,27 +658,27 @@ const PLAN_FEATURES = {
 const PLAN_DESC = {
   free:         'Basic filtering to get started at no cost.',
   starter:      'Essential filters for small stores just getting started.',
-  plus:         'Variant filtering and sorting for growing catalogs.',
-  growth:       'Every filter feature unlocked for high-volume stores.',
-  professional: 'Advanced features with dedicated account support.',
-  business:     'Full power for large-scale store operations.',
+  growth:       'Variant filtering and sorting for growing catalogs.',
+  professional: 'Every filter feature unlocked for high-volume stores.',
+  business:     'Advanced features with dedicated account support.',
+  advanced:     'Full power for large-scale store operations.',
   enterprise:   'Custom pricing for stores with more than 200,000 products.',
 };
 
-const PLAN_ORDER = ['free','starter','plus','growth','professional','business','enterprise'];
+const PLAN_ORDER = ['free','starter','growth','professional','business','advanced','enterprise'];
 
 const PLAN_FEATURES_SHORT = {
   free:         ['Basic product search','Up to 3 custom filters','Manual filter setup','Community forum support','Standard indexing speed'],
   starter:      ['Metafield-based filters','Swatch image support','Filter count display','Email support (48h)','Up to 10 custom filters'],
-  plus:         ['Everything in Starter','Storefront sorting rules','Variant-level filtering','Multi-currency markets','Priority email support (24h)'],
-  growth:       ['Everything in Plus','Advanced variant filters','Multi-source filter merging','Collection-level search','OR-mode & Market filters'],
-  professional: ['Everything in Growth','Dedicated account manager','Custom indexing limits','Priority SLA (< 4h response)','Custom integration support'],
-  business:     ['Everything in Professional','Advanced analytics dashboard','White-glove onboarding','Bulk API access','Volume discounts'],
+  growth:       ['Everything in Starter','Storefront sorting rules','Variant-level filtering','Multi-currency markets','Priority email support (24h)'],
+  professional: ['Everything in Growth','Advanced variant filters','Multi-source filter merging','Collection-level search','OR-mode & Market filters'],
+  business:     ['Everything in Professional','Dedicated account manager','Custom indexing limits','Priority SLA (< 4h response)','Custom integration support'],
+  advanced:     ['Everything in Business','Advanced analytics dashboard','White-glove onboarding','Bulk API access','Volume discounts'],
   enterprise:   ['Custom product limit (200K+)','Dedicated onboarding session','Guaranteed SLA response time','Custom data integrations','Volume-based pricing'],
 };
 
 const PLAN_PILLS={};
-const PLAN_LIMITS={free:300,starter:3000,plus:50000,growth:100000,professional:150000,business:200000,enterprise:Infinity};
+const PLAN_LIMITS={free:300,starter:3000,growth:50000,professional:100000,business:150000,advanced:200000,enterprise:Infinity};
 
 const ADDON_PRICES = { ymm:9.99, aiSearch:14.99, synonyms:4.99, b2bFilter:7.99 };
 const ADDON_LABELS = {
