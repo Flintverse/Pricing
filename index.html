@@ -439,27 +439,59 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
         <div class="faq-section" style="margin-top:1.25rem">
           <div class="faq-head">
             <i class="ti ti-help-circle"></i>
-            <div class="faq-head-title">Billing, trials &amp; cancellation</div>
+            <div class="faq-head-title">Frequently asked questions</div>
           </div>
           <div class="faq-item">
-            <button class="faq-q" onclick="toggleFaq(this)">Do paid plans include a free trial?<i class="ti ti-chevron-down faq-arrow"></i></button>
-            <div class="faq-a">Yes - all paid plans (Starter, Growth, Pro, Enterprise) include a <strong>14-day free trial</strong>. You won't be charged until the trial ends, and you can cancel anytime before then with no cost.</div>
+            <button class="faq-q" onclick="toggleFaq(this)">Is there a free plan?<i class="ti ti-chevron-down faq-arrow"></i></button>
+            <div class="faq-a">Yes. The Free plan supports stores with up to <strong>300 products</strong> at no cost. Development stores with fewer than 50,000 products also qualify for free access.</div>
           </div>
           <div class="faq-item">
-            <button class="faq-q" onclick="toggleFaq(this)">Do I get another trial when switching between paid plans?<i class="ti ti-chevron-down faq-arrow"></i></button>
-            <div class="faq-a">No. The 14-day trial applies only to your first paid subscription. Upgrading or downgrading between paid plans adjusts billing immediately - no additional trial period is granted.</div>
+            <button class="faq-q" onclick="toggleFaq(this)">Can I change my plan anytime?<i class="ti ti-chevron-down faq-arrow"></i></button>
+            <div class="faq-a">Yes. You can upgrade or downgrade between tiers at any time. Billing continues at your current frequency (monthly or annual) under the new plan — there is no lock-in between tiers.</div>
           </div>
           <div class="faq-item">
-            <button class="faq-q" onclick="toggleFaq(this)">Can I cancel and go back to Free at any time?<i class="ti ti-chevron-down faq-arrow"></i></button>
-            <div class="faq-a">Yes. You can downgrade to the Free plan at any time using the "Cancel plan" link in your plan summary. Your paid features stay active until the end of the current billing period, then your store reverts to Free automatically.</div>
+            <button class="faq-q" onclick="toggleFaq(this)">What happens if I upgrade?<i class="ti ti-chevron-down faq-arrow"></i></button>
+            <div class="faq-a">When you upgrade, you are billed at the new plan rate going forward. There is no separate prorated refund for unused days on your previous plan — the new rate applies from your next billing cycle.</div>
           </div>
           <div class="faq-item">
-            <button class="faq-q" onclick="toggleFaq(this)">What is the refund policy?<i class="ti ti-chevron-down faq-arrow"></i></button>
-            <div class="faq-a">Billing is processed by Shopify and subject to <a href="https://www.shopify.com/legal/terms" target="_blank">Shopify's billing terms</a>. Charges are generally non-refundable except where required by law.</div>
+            <button class="faq-q" onclick="toggleFaq(this)">What happens if I downgrade?<i class="ti ti-chevron-down faq-arrow"></i></button>
+            <div class="faq-a">You move to the lower plan at the end of your current billing period with no proration or refund. Product count limits of the new plan will apply — products above the limit won't be indexed until you upgrade.</div>
           </div>
           <div class="faq-item">
-            <button class="faq-q" onclick="toggleFaq(this)">How does billing work on a Shopify development store?<i class="ti ti-chevron-down faq-arrow"></i></button>
-            <div class="faq-a">Development stores follow the same plan structure as live stores. However, Shopify does not charge real money on dev stores - all charges are simulated. Once transferred to a live merchant, billing begins normally.</div>
+            <button class="faq-q" onclick="toggleFaq(this)">Can I switch from monthly to annual billing (or vice versa)?<i class="ti ti-chevron-down faq-arrow"></i></button>
+            <div class="faq-a">You can switch from <strong>Monthly to Annual</strong> at any time — the change takes effect at your next billing date. Switching from <strong>Annual to Monthly</strong> is not available until your current annual term ends.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">What happens if I cancel my annual plan mid-term?<i class="ti ti-chevron-down faq-arrow"></i></button>
+            <div class="faq-a">Your plan stays active until the end of the annual billing term. No prorated refund is issued for remaining months. At term end, your store reverts to Free unless you subscribe to a new plan.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">Is there a free trial on paid plans?<i class="ti ti-chevron-down faq-arrow"></i></button>
+            <div class="faq-a">Yes. All paid plans include a <strong>14-day free trial</strong>, one-time per store. You won't receive another trial when switching between paid plans or after canceling and re-subscribing.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">What happens if my store exceeds the product limit?<i class="ti ti-chevron-down faq-arrow"></i></button>
+            <div class="faq-a">Filters and search continue to work for products already indexed. New products above the limit won't be indexed until you upgrade to a plan that supports your product count.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">Do all plans include the same features?<i class="ti ti-chevron-down faq-arrow"></i></button>
+            <div class="faq-a">Yes. All paid plans include the same core feature set. The primary difference between plans is the product count limit — higher plans support larger catalogs.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">Is theme customization included?<i class="ti ti-chevron-down faq-arrow"></i></button>
+            <div class="faq-a">Yes. Free theme customization is included with all plans. Our team will help configure Findter to match your store's design at no additional cost.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">Can I cancel anytime?<i class="ti ti-chevron-down faq-arrow"></i></button>
+            <div class="faq-a">Yes. You can cancel your subscription at any time through Shopify. There are no long-term commitments on monthly plans. Annual plans remain active until the end of the billing term.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">Will Findter work with my Shopify theme?<i class="ti ti-chevron-down faq-arrow"></i></button>
+            <div class="faq-a">Findter works with most Shopify themes out of the box. If any adjustments are needed, our team will customize the integration for your theme at no extra cost.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">What support do you offer?<i class="ti ti-chevron-down faq-arrow"></i></button>
+            <div class="faq-a">All plans include email and live chat support. Starter and above receive priority response times. Professional and higher plans include dedicated 1-on-1 account support.</div>
           </div>
         </div>
 
@@ -1035,9 +1067,12 @@ function switchBillingModal(newMode){
   const pxLabel=newMode==='annual'
     ?`$${(plan.annPx*12).toFixed(2)}/year ($${plan.annPx.toFixed(2)}/mo billed annually)`
     :`$${plan.price.toFixed(2)}/month`;
+  const lockNote=newMode==='annual'
+    ?`<p style="margin-top:.5rem;font-size:11.5px;color:var(--muted)">Once switched, you won't be able to switch back to Monthly until the end of this annual billing cycle.</p>`
+    :'';
   openModal(
     `Switch to ${newLabel}`,
-    `<p>Switching your <strong>${plan.name}</strong> plan billing from <strong>${oldLabel}</strong> to <strong>${newLabel}</strong>.</p><p>New rate: <strong>${pxLabel}</strong></p><p>The change takes effect at your next billing date.</p>`,
+    `<p>Switching your <strong>${plan.name}</strong> plan billing from <strong>${oldLabel}</strong> to <strong>${newLabel}</strong>.</p><p>New rate: <strong>${pxLabel}</strong></p><p>The change takes effect at your next billing date.</p>${lockNote}`,
     `Confirm switch`,false,
     ()=>{
       USER_BILLING=newMode;billingMode=newMode;
@@ -1231,26 +1266,38 @@ function openModal(title,bodyHTML,confirmLabel,isDanger,onConfirm){
 
 function openDowngradeToFreeSurvey(){
   const cb='width:14px;height:14px;cursor:pointer;accent-color:var(--teal)';
+  const rb='width:14px;height:14px;cursor:pointer;accent-color:var(--teal)';
   const lbl='display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--txt2);cursor:pointer';
   const surveyHTML=`
     <div style="display:flex;flex-direction:column;gap:16px">
-      <p style="font-size:12.5px;color:var(--txt2);line-height:1.55">We're sorry to see you go. Your answers help us improve Findter.</p>
+      <p style="font-size:12.5px;color:var(--txt2);line-height:1.55">We'd love to keep you, but if you must go, your feedback helps us improve.</p>
       <div>
         <div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:9px">1. What is your main reason for downgrading? <span style="color:#dc2626;font-weight:700">*</span></div>
         <div style="display:flex;flex-direction:column;gap:7px">
           <label style="${lbl}"><input class="surv-q1" type="checkbox" style="${cb}" onchange="checkSurveyReq()"> Price / budget is too high</label>
           <label style="${lbl}"><input class="surv-q1" type="checkbox" style="${cb}" onchange="checkSurveyReq()"> Not using enough of the features</label>
+          <label style="${lbl}"><input class="surv-q1" type="checkbox" style="${cb}" onchange="checkSurveyReq()"> Product count decreased</label>
           <label style="${lbl}"><input class="surv-q1" type="checkbox" style="${cb}" onchange="checkSurveyReq()"> Found a better alternative</label>
           <label style="${lbl}"><input class="surv-q1" type="checkbox" style="${cb}" onchange="checkSurveyReq()"> Just testing — not ready to commit yet</label>
+          <label style="${lbl}"><input class="surv-q1" type="checkbox" style="${cb}" onchange="checkSurveyReq()"> Store closing / pausing</label>
         </div>
       </div>
       <div>
-        <div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:9px">2. How satisfied were you with the plan overall? <span style="color:#dc2626;font-weight:700">*</span></div>
+        <div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:9px">2. How satisfied were you overall? <span style="color:#dc2626;font-weight:700">*</span></div>
         <div style="display:flex;flex-direction:column;gap:7px">
-          <label style="${lbl}"><input class="surv-q2" type="checkbox" style="${cb}" onchange="checkSurveyReq()"> Very satisfied — it worked great</label>
-          <label style="${lbl}"><input class="surv-q2" type="checkbox" style="${cb}" onchange="checkSurveyReq()"> Somewhat satisfied — met some of my needs</label>
-          <label style="${lbl}"><input class="surv-q2" type="checkbox" style="${cb}" onchange="checkSurveyReq()"> Neutral — nothing stood out</label>
-          <label style="${lbl}"><input class="surv-q2" type="checkbox" style="${cb}" onchange="checkSurveyReq()"> Dissatisfied — had issues or missing features</label>
+          <label style="${lbl}"><input class="surv-q2" type="radio" name="surv-q2" style="${rb}" onchange="checkSurveyReq()"> Very satisfied</label>
+          <label style="${lbl}"><input class="surv-q2" type="radio" name="surv-q2" style="${rb}" onchange="checkSurveyReq()"> Somewhat satisfied</label>
+          <label style="${lbl}"><input class="surv-q2" type="radio" name="surv-q2" style="${rb}" onchange="checkSurveyReq()"> Neutral</label>
+          <label style="${lbl}"><input class="surv-q2" type="radio" name="surv-q2" style="${rb}" onchange="checkSurveyReq()"> Dissatisfied</label>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:9px">3. What would make you upgrade again? <span style="font-weight:400;color:var(--muted)">(optional)</span></div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <label style="${lbl}"><input class="surv-q3" type="checkbox" style="${cb}"> Lower price</label>
+          <label style="${lbl}"><input class="surv-q3" type="checkbox" style="${cb}"> More features</label>
+          <label style="${lbl}"><input class="surv-q3" type="checkbox" style="${cb}"> Better support</label>
+          <label style="${lbl}"><input class="surv-q3" type="checkbox" style="${cb}"> Nothing — won't upgrade</label>
         </div>
       </div>
       <div>
@@ -1265,7 +1312,7 @@ function openDowngradeToFreeSurvey(){
 
 function checkSurveyReq(){
   const q1=Array.from(document.querySelectorAll('.surv-q1')).some(c=>c.checked);
-  const q2=Array.from(document.querySelectorAll('.surv-q2')).some(c=>c.checked);
+  const q2=document.querySelector('.surv-q2:checked')!==null;
   const btn=document.getElementById('modal-confirm-btn');
   if(!btn) return;
   const ok=q1&&q2;
