@@ -62,7 +62,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 .ms-circle{width:8px;height:8px;border-radius:50%;background:var(--bdr2);border:2px solid var(--s2);transition:background .2s,transform .2s}
 .ms-circle.lit{background:var(--teal);transform:scale(1.25)}
 .ms-lbl{font-size:9px;color:var(--muted);white-space:nowrap;font-weight:500;text-align:center}
-.milestones .ms-dot:last-child{transform:translateX(-80%)}
+.milestones .ms-dot:last-child{transform:translateX(-50%)}
 
 
 /* -- DUAL PLAN CARDS (CSS subgrid for cross-card alignment) -- */
@@ -94,7 +94,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 .pc-name-wrap{display:flex;flex-direction:column;gap:5px}
 .pc-plan-pill{display:inline-flex;align-items:center;font-size:10px;font-weight:600;padding:2px 9px;border-radius:999px;width:fit-content}
 .pill-popular{background:var(--teal-lt);color:var(--teal-dk);border:1px solid #a7f3d0}
-.pill-large{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe}
+.pill-large{background:Ư#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe}
 .pill-massive{background:#fff7ed;color:#c2410c;border:1px solid #fed7aa}
 .pill-custom{background:#fdf4ff;color:#86198f;border:1px solid #f0abfc}
 .pc-badge{font-size:10px;font-weight:500;padding:2px 7px;border-radius:999px}
@@ -238,7 +238,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 /* -- STORE MARKER -- */
 .store-tick{position:absolute;top:calc(36px - 5px);width:2.5px;height:28px;background:#f59e0b;border-radius:2px;pointer-events:none;z-index:6;transform:translateX(-50%);display:none}
 .store-lbl-row{position:relative;height:16px;margin-top:5px}
-.store-tick-lbl{position:absolute;top:0;font-size:9px;font-weight:700;color:#b45309;white-space:nowrap;pointer-events:none;z-index:6;transform:translateX(-50%)}
+.store-tick-lbl{position:absolute;top:0;font-size:11px;font-weight:700;color:#b45309;white-space:nowrap;pointer-events:none;z-index:6;transform:translateX(-50%)}
 
 /* -- TOTAL BREAKDOWN -- */
 .total-toggle{background:none;border:none;cursor:pointer;padding:0 3px;color:var(--muted);font-family:var(--font);vertical-align:middle;line-height:1}
@@ -378,7 +378,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
   </div>
 
   <h1 class="pg-title">Pricing</h1>
-  <p class="pg-sub">Choose a plan and features that fits your store.</p>
+  <p class="pg-sub">Manage your pricing plan. Read more guidelines <strong><u>here</u></strong></p>
 
   <!-- CURRENT PLAN BANNER -->
   <div class="cur-banner">
@@ -386,7 +386,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
       <div class="cur-banner-left">
         <i class="ti ti-circle-check-filled"></i>
         <div>
-          <div class="cur-banner-plan">You are currently on the <strong id="cb-plan-name">Free plan</strong></div>
+          <div class="cur-banner-plan">Current plan: <strong id="cb-plan-name">Free plan</strong></div>
           <div class="cur-banner-expiry" id="cb-plan-expiry">
             <i class="ti ti-calendar-event"></i>
             <span id="cb-expiry-txt">Trial expires in 14 days</span>
@@ -636,28 +636,29 @@ const PLAN_COUNT_RANGES = {
 
 const ANCHORS = [
   { pos:  0, count:      0 },
-  { pos:  8, count:    100 },
-  { pos: 16, count:    300 },
-  { pos: 24, count:   1000 },
-  { pos: 32, count:   3000 },
-  { pos: 44, count:  10000 },
-  { pos: 56, count:  30000 },
-  { pos: 64, count:  50000 },
-  { pos: 72, count:  75000 },
-  { pos: 80, count: 100000 },
-  { pos: 88, count: 150000 },
-  { pos: 96, count: 200000 },
+  { pos:  3, count:    100 },
+  { pos:  6, count:    300 },
+  { pos: 11, count:   1000 },
+  { pos: 16, count:   3000 },
+  { pos: 23, count:  10000 },
+  { pos: 31, count:  50000 },
+  { pos: 41, count:  75000 },
+  { pos: 52, count: 100000 },
+  { pos: 60, count: 125000 },
+  { pos: 69, count: 150000 },
+  { pos: 77, count: 175000 },
+  { pos: 86, count: 200000 },
   { pos:100, count: 250000 },
 ];
 
 const MILESTONE_DOTS = [
   { pos:  0, label:'0'     },
-  { pos: 16, label:'300'   },
-  { pos: 32, label:'3K'    },
-  { pos: 64, label:'50K'   },
-  { pos: 80, label:'100K'  },
-  { pos: 88, label:'150K'  },
-  { pos: 96, label:'200K+' },
+  { pos:  6, label:'300'   },
+  { pos: 16, label:'3K'    },
+  { pos: 31, label:'50K'   },
+  { pos: 52, label:'100K'  },
+  { pos: 69, label:'150K'  },
+  { pos: 86, label:'200K+' },
 ];
 
 const PLANS = {
@@ -945,22 +946,14 @@ function renderFreeCard(){
 }
 
 function renderSelCard(){
-  if(selPlan==='free'){
-    return `
-      <div class="plan-card empty-card">
-        <div style="text-align:center;color:var(--muted);padding:1rem">
-          <i class="ti ti-arrow-bar-right" style="font-size:28px;display:block;margin-bottom:10px;color:var(--bdr2)"></i>
-          <div style="font-size:12px;line-height:1.6">Move the slider to<br>explore paid plans</div>
-        </div>
-      </div>`;
-  }
+  const displayPlan=selPlan==='free'?'starter':selPlan;
 
-  const p=PLANS[selPlan];
-  const isQuote=selPlan==='enterprise';
+  const p=PLANS[displayPlan];
+  const isQuote=displayPlan==='enterprise';
   const isAnn=billingMode==='annual'&&!isQuote;
-  const isCurrent=selPlan===USER_PLAN;
+  const isCurrent=displayPlan===USER_PLAN;
   const curIdx=PLAN_ORDER.indexOf(USER_PLAN);
-  const selIdx=PLAN_ORDER.indexOf(selPlan);
+  const selIdx=PLAN_ORDER.indexOf(displayPlan);
   const isUp=selIdx>curIdx;
   const isOpen=cardFeatsOpen.sel;
 
@@ -968,7 +961,7 @@ function renderSelCard(){
   const extraClass=isAnn&&!isQuote?' annual-card':'';
   const showDiscount=!isQuote&&!isCurrent&&!isBillSwitch;
   const discountLink=showDiscount
-    ?`<button class="card-discount-link" onclick="openDiscountModal('${selPlan}')">Have a discount code?</button>`
+    ?`<button class="card-discount-link" onclick="openDiscountModal('${displayPlan}')">Have a discount code?</button>`
     :'';
 
   const pill='';
@@ -993,7 +986,7 @@ function renderSelCard(){
     priceHTML=`<div class="pc-price-main">$${p.price.toFixed(2)}<span class="pc-price-unit">/mo</span></div>`;
   }
 
-  const featItems=(PLAN_FEATURES_SHORT[selPlan]||[]).map(f=>
+  const featItems=(PLAN_FEATURES_SHORT[displayPlan]||[]).map(f=>
     `<div class="feat-collapse-item"><i class="ti ti-check"></i>${f}</div>`).join('');
 
   const limitLine=isQuote
@@ -1009,9 +1002,9 @@ function renderSelCard(){
   } else if(isCurrent){
     cta=`<button class="card-cta noop" disabled><i class="ti ti-check"></i> You're on this plan</button>`;
   } else if(isUp){
-    cta=`<button class="card-cta upgrade" onclick="openPlanModal('${selPlan}')"><i class="ti ti-arrow-up-right"></i> Upgrade to ${p.name}</button>`;
+    cta=`<button class="card-cta upgrade" onclick="openPlanModal('${displayPlan}')"><i class="ti ti-arrow-up-right"></i> Upgrade to ${p.name}</button>`;
   } else {
-    cta=`<button class="card-cta downgrade" onclick="openPlanModal('${selPlan}')"><i class="ti ti-arrow-down-right"></i> Downgrade to ${p.name}</button>`;
+    cta=`<button class="card-cta downgrade" onclick="openPlanModal('${displayPlan}')"><i class="ti ti-arrow-down-right"></i> Downgrade to ${p.name}</button>`;
   }
 
   return `
