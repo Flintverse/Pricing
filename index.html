@@ -1426,7 +1426,7 @@ function initCurrentPlanBanner(){
     if(warnEl){
       if(exceeded){
         const rec=planForCount(used);
-        warnEl.textContent=`⚠ Your store exceeds the current plan limit. New added or updated products will not be displayed on storefront. Recommend upgrading to the ${PLANS[rec].name} plan.`;
+        warnEl.textContent=`⚠ Your store exceeds the current plan limit. New added or updated products will not display on storefront. Recommend upgrading to the ${PLANS[rec].name} plan.`;
         warnEl.style.display='block';
       } else { warnEl.style.display='none'; }
     }
