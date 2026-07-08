@@ -663,11 +663,11 @@ const MILESTONE_DOTS = [
 
 const PLANS = {
   free:         { name:'Free',         price:0,    annPx:0,     limitLabel:'300',      limitPct:1   },
-  starter:      { name:'Starter',      price:9,    annPx:7.47,  limitLabel:'3,000',    limitPct:3   },
-  growth:       { name:'Growth',       price:19,   annPx:15.77, limitLabel:'50,000',   limitPct:50  },
-  professional: { name:'Professional', price:49,   annPx:40.67, limitLabel:'100,000',  limitPct:100 },
-  business:     { name:'Business',     price:79,   annPx:65.57, limitLabel:'150,000',  limitPct:100 },
-  advanced:     { name:'Advanced',     price:99,   annPx:82.17, limitLabel:'200,000',  limitPct:100 },
+  starter:      { name:'Starter',      price:9,    annPx:8.10,  limitLabel:'3,000',    limitPct:3   },
+  growth:       { name:'Growth',       price:19,   annPx:17.10, limitLabel:'50,000',   limitPct:50  },
+  professional: { name:'Professional', price:49,   annPx:44.10, limitLabel:'100,000',  limitPct:100 },
+  business:     { name:'Business',     price:79,   annPx:71.10, limitLabel:'150,000',  limitPct:100 },
+  advanced:     { name:'Advanced',     price:99,   annPx:89.10, limitLabel:'200,000',  limitPct:100 },
   enterprise:   { name:'Enterprise',   price:null, annPx:null,  limitLabel:'200,000+', limitPct:100 },
 };
 
@@ -959,7 +959,7 @@ function renderSelCard(){
 
   const isBillSwitch=isCurrent&&!isQuote&&billingMode!==USER_BILLING;
   const extraClass=isAnn&&!isQuote?' annual-card':'';
-  const showDiscount=!isQuote&&!isCurrent&&!isBillSwitch;
+  const showDiscount=!isQuote&&(!isCurrent||(isBillSwitch&&billingMode==='annual'));
   const discountLink=showDiscount
     ?`<button class="card-discount-link" onclick="openDiscountModal('${displayPlan}')">Have a discount code?</button>`
     :'';
@@ -970,7 +970,7 @@ function renderSelCard(){
   const billingToggle=isQuote?'':`
     <div class="card-billing-inner">
       <button class="card-bill-tab${billingMode==='monthly'?' active':''}" onclick="selectBilling('monthly')"${monthlyLocked?' style="opacity:.45;cursor:not-allowed"':''}>Monthly</button>
-      <button class="card-bill-tab${billingMode==='annual'?' active':''}" onclick="selectBilling('annual')">Annually<span class="card-bill-save">-17%</span></button>
+      <button class="card-bill-tab${billingMode==='annual'?' active':''}" onclick="selectBilling('annual')">Annually<span class="card-bill-save">-10%</span></button>
     </div>`;
 
   const trialRibbon=!isQuote&&!isCurrent&&isUp&&USER_PLAN==='free'
@@ -1395,7 +1395,7 @@ function modalBgClick(e){
 function initCurrentPlanBanner(){
   const cur=PLANS[USER_PLAN];
   const nameEl=document.getElementById('cb-plan-name');
-  if(nameEl) nameEl.textContent=cur.name+' plan';
+  if(nameEl) nameEl.textContent=cur.name;
 
   const expiryRow=document.getElementById('cb-plan-expiry');
   const expiryTxt=document.getElementById('cb-expiry-txt');
@@ -1426,7 +1426,7 @@ function initCurrentPlanBanner(){
     if(warnEl){
       if(exceeded){
         const rec=planForCount(used);
-        warnEl.textContent=`⚠ Your store exceeds the current plan limit. Recommend upgrading to the ${PLANS[rec].name} plan.`;
+        warnEl.textContent=`⚠ Your store exceeds the current plan limit. New added or updated products will not be displayed on storefront. Recommend upgrading to the ${PLANS[rec].name} plan.`;
         warnEl.style.display='block';
       } else { warnEl.style.display='none'; }
     }
