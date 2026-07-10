@@ -1448,7 +1448,9 @@ function initCurrentPlanBanner(){
       if(exceeded&&!trialActive){
         const rec=planForCount(used);
         const lim=PLAN_LIMITS[USER_PLAN];
-        warnEl.textContent=`⚠ Each day without upgrading, your storefront displays 5% fewer products until only the first 300 remain. Upgrade to the ${PLANS[rec].name} plan to keep your full catalog visible.`;
+        warnEl.textContent=customerType==='returning'
+          ?`⚠ To keep your store working well at no cost, your catalog shrinks 5% daily until only 300 remain. Upgrade to the ${PLANS[rec].name} plan to keep all visible`
+          :`⚠ Your catalog exceeds the free plan limit. Upgrade to the ${PLANS[rec].name} plan to show all your products.`;
         warnEl.style.display='block';
       } else { warnEl.style.display='none'; }
     }
