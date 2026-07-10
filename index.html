@@ -32,6 +32,13 @@ html,body{font-family:var(--font);background:#f3f4f6;color:var(--txt);min-height
 .opts-bar-field input[type=number]{padding:5px 9px;border:1.5px solid var(--bdr2);border-radius:6px;font-size:12.5px;font-family:var(--font);color:var(--txt);background:var(--s2);width:130px;outline:none;appearance:textfield;-moz-appearance:textfield}
 .opts-bar-field input[type=number]::-webkit-outer-spin-button,.opts-bar-field input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;appearance:none;margin:0}
 .opts-bar-field input[type=number]:focus{border-color:var(--teal)}
+.ctype-btn{padding:5px 13px;font-size:11.5px;font-weight:600;border-radius:999px;border:1.5px solid var(--bdr2);background:var(--s2);cursor:pointer;color:var(--txt2);font-family:var(--font);transition:all .15s;white-space:nowrap}
+.ctype-btn.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+.ctype-btn:not(.active):hover{background:var(--bdr)}
+.ctype-sub-btn{padding:3px 10px;font-size:10.5px;font-weight:600;border-radius:999px;border:1.5px solid var(--bdr2);background:var(--s2);cursor:pointer;color:var(--txt2);font-family:var(--font);transition:all .15s;white-space:nowrap}
+.ctype-sub-btn:hover{background:var(--bdr)}
+.ctype-sub-btn.warn{border-color:#fed7aa;color:#c2410c;background:#fff7ed}
+.ctype-sub-btn.warn:hover{background:#ffedd5}
 
 /* LAYOUT */
 .root{display:grid;grid-template-columns:1fr 288px;gap:1.25rem;align-items:start}
@@ -375,6 +382,13 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
       <input type="number" id="opt-store-count" min="0" placeholder="e.g. 4800"
              oninput="setStoreCount(this.value)"/>
     </div>
+    <div style="margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0">
+      <div style="display:flex;gap:6px">
+        <button class="ctype-btn active" id="ctype-new" onclick="setCustomerType('new')">Khách Mới</button>
+        <button class="ctype-btn" id="ctype-old" onclick="setCustomerType('returning')">Khách Cũ</button>
+      </div>
+      <div id="ctype-sub-btns" style="display:flex;gap:6px"></div>
+    </div>
   </div>
 
   <h1 class="pg-title">Pricing</h1>
@@ -665,7 +679,7 @@ const PLANS = {
   free:         { name:'Free',         price:0,    annPx:0,     limitLabel:'300',      limitPct:1   },
   starter:      { name:'Starter',      price:9,    annPx:8.10,  limitLabel:'3,000',    limitPct:3   },
   growth:       { name:'Growth',       price:19,   annPx:17.10, limitLabel:'50,000',   limitPct:50  },
-  professional: { name:'Professional', price:49,   annPx:44.10, limitLabel:'100,000',  limitPct:100 },
+  professional: { name:'Professional', price:59,   annPx:53.10, limitLabel:'100,000',  limitPct:100 },
   business:     { name:'Business',     price:79,   annPx:71.10, limitLabel:'150,000',  limitPct:100 },
   advanced:     { name:'Advanced',     price:99,   annPx:89.10, limitLabel:'200,000',  limitPct:100 },
   enterprise:   { name:'Enterprise',   price:null, annPx:null,  limitLabel:'200,000+', limitPct:100 },
@@ -807,6 +821,8 @@ let cardDiscountPct = 0;
 let pendingDiscPlan = null;
 let pendingDiscBill = null;
 let storeProductCount = 0;
+let customerType = 'new'; // 'new' | 'returning'
+let trialEnded = false;
 
 /* HELPERS */
 function countForPos(pos){
@@ -973,7 +989,7 @@ function renderSelCard(){
       <button class="card-bill-tab${billingMode==='annual'?' active':''}" onclick="selectBilling('annual')">Annually<span class="card-bill-save">-10%</span></button>
     </div>`;
 
-  const trialRibbon=!isQuote&&!isCurrent&&isUp&&USER_PLAN==='free'
+  const trialRibbon=!isQuote&&!isCurrent&&isUp&&USER_PLAN==='free'&&customerType==='new'&&!trialEnded
     ?`<div class="trial-ribbon"><i class="ti ti-clock"></i> 14-day free trial included</div>`:'';
 
   let priceHTML='';
@@ -1335,7 +1351,7 @@ function openPlanModal(targetPlan){
     const isAnn=billingMode==='annual'&&toP.annPx;
     const raw=isAnn?toP.annPx*12:toP.price;
     const suffix=isAnn?'/yr':'/mo';
-    const trial=fromP.price===0?`<p style="font-size:12px;color:var(--txt2);margin-top:.5rem">✓ Your 14-day free trial starts today — no charge until it ends.</p>`:'';
+    const trial=fromP.price===0&&customerType==='new'&&!trialEnded?`<p style="font-size:12px;color:var(--txt2);margin-top:.5rem">✓ Your 14-day free trial starts today — no charge until it ends.</p>`:'';
     const body=`
       <div style="background:var(--s1);border-radius:var(--r);border:1px solid var(--bdr);padding:12px 14px;margin-bottom:.5rem">
         <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:10px">Order summary</div>
@@ -1361,6 +1377,7 @@ function applyPlanChange(targetPlan){
   const selIdx=PLAN_ORDER.indexOf(targetPlan);
   const curIdx=PLAN_ORDER.indexOf(USER_PLAN);
   const isUp=selIdx>curIdx;
+  if(customerType==='new'&&USER_PLAN==='free'&&targetPlan!=='free') trialEnded=true;
   USER_PLAN=targetPlan;USER_BILLING=billingMode;
   if(USER_PLAN!=='free'&&USER_PLAN!=='enterprise'){
     const now=new Date();
@@ -1401,16 +1418,18 @@ function initCurrentPlanBanner(){
   const expiryTxt=document.getElementById('cb-expiry-txt');
   if(expiryRow&&expiryTxt){
     if(planExpiresDate&&cur.price!==0&&cur.price!==null){
-      const msLeft=planExpiresDate-new Date();
-      const daysLeft=Math.max(0,Math.ceil(msLeft/(1000*60*60*24)));
-      expiryTxt.textContent=`Plan expires in ${daysLeft} day${daysLeft!==1?'s':''}`;
-    } else {
+      const fmt=planExpiresDate.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+      expiryTxt.textContent=`Plan expires on: ${fmt}`;
+      expiryRow.style.display='flex';
+    } else if(customerType==='new'&&!trialEnded){
       const trialEnd=new Date();trialEnd.setDate(trialEnd.getDate()+14);
       const msLeft=trialEnd-new Date();
       const daysLeft=Math.max(0,Math.ceil(msLeft/(1000*60*60*24)));
       expiryTxt.textContent=`Trial expires in ${daysLeft} days`;
+      expiryRow.style.display='flex';
+    } else {
+      expiryRow.style.display='none';
     }
-    expiryRow.style.display='flex';
   }
 
   const fillEl=document.getElementById('cb-lim-fill');
@@ -1425,10 +1444,11 @@ function initCurrentPlanBanner(){
     if(fillEl){fillEl.style.width=pct+'%';fillEl.style.background=exceeded?'#f59e0b':'var(--teal)';}
     if(lblEl) lblEl.textContent=`${used.toLocaleString()} / ${planLim.toLocaleString()} products`;
     if(warnEl){
-      if(exceeded){
+      const trialActive=customerType==='new'&&!trialEnded;
+      if(exceeded&&!trialActive){
         const rec=planForCount(used);
         const lim=PLAN_LIMITS[USER_PLAN];
-        warnEl.textContent=`⚠ Only the first ${lim.toLocaleString()} products will be displayed on your storefront. Upgrade to the ${PLANS[rec].name} plan to display your full catalog.`;
+        warnEl.textContent=`⚠ Each day without upgrading, your storefront displays 5% fewer products until only the first 300 remain. Upgrade to the ${PLANS[rec].name} plan to keep your full catalog visible.`;
         warnEl.style.display='block';
       } else { warnEl.style.display='none'; }
     }
@@ -1437,6 +1457,49 @@ function initCurrentPlanBanner(){
     if(lblEl) lblEl.textContent=cur.limitLabel+' products';
     if(warnEl) warnEl.style.display='none';
   }
+}
+
+/* CUSTOMER TYPE */
+function setCustomerType(type){
+  customerType=type;
+  trialEnded=false;
+  document.getElementById('ctype-new').classList.toggle('active',type==='new');
+  document.getElementById('ctype-old').classList.toggle('active',type==='returning');
+  renderDualCards();
+  initCurrentPlanBanner();
+  renderSubBtns();
+}
+
+function renderSubBtns(){
+  const c=document.getElementById('ctype-sub-btns');
+  if(!c) return;
+  if(customerType==='new'){
+    const trialBtn=!trialEnded
+      ?`<button class="ctype-sub-btn" onclick="endTrial()">End Trial</button>`:'';
+    c.innerHTML=trialBtn+`<button class="ctype-sub-btn warn" onclick="endPlan()">End Plan</button>`;
+  } else if(customerType==='returning'){
+    c.innerHTML=`<button class="ctype-sub-btn warn" onclick="endPlan()">End Plan</button>`;
+  } else {
+    c.innerHTML='';
+  }
+}
+
+function endTrial(){
+  trialEnded=true;
+  renderDualCards();
+  initCurrentPlanBanner();
+  renderSubBtns();
+}
+
+function endPlan(){
+  USER_PLAN='free';
+  USER_BILLING='monthly';
+  billingMode='monthly';
+  planExpiresDate=null;
+  trialEnded=true;
+  renderDualCards();
+  initCurrentPlanBanner();
+  renderSubBtns();
 }
 
 /* OPTIONS BAR */
@@ -1621,7 +1684,7 @@ function renderDiscSummary(pct){
   const final=raw*(1-pct/100);
   const suffix=isAnn?'/yr':'/mo';
   const saving=(raw-final).toFixed(2);
-  const trial=USER_PLAN==='free'
+  const trial=USER_PLAN==='free'&&customerType==='new'&&!trialEnded
     ?`<p style="font-size:12px;color:var(--txt2);margin-top:.5rem">✓ Your 14-day free trial starts today — no charge until it ends.</p>`
     :'';
   document.getElementById('disc-summary-section').innerHTML=`
@@ -1676,6 +1739,7 @@ renderDualCards();
 renderPlanSummary();
 renderAddonSummary();renderAddonBanner();
 initCurrentPlanBanner();
+renderSubBtns();
 (function(){
   const el=document.getElementById('chat-greeting-time');
   if(el) el.textContent=new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
