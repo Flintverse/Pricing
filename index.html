@@ -1401,8 +1401,9 @@ function initCurrentPlanBanner(){
   const expiryTxt=document.getElementById('cb-expiry-txt');
   if(expiryRow&&expiryTxt){
     if(planExpiresDate&&cur.price!==0&&cur.price!==null){
-      const fmt=planExpiresDate.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
-      expiryTxt.textContent=`Plan expires on: ${fmt}`;
+      const msLeft=planExpiresDate-new Date();
+      const daysLeft=Math.max(0,Math.ceil(msLeft/(1000*60*60*24)));
+      expiryTxt.textContent=`Plan expires in ${daysLeft} day${daysLeft!==1?'s':''}`;
     } else {
       const trialEnd=new Date();trialEnd.setDate(trialEnd.getDate()+14);
       const msLeft=trialEnd-new Date();
@@ -1426,7 +1427,8 @@ function initCurrentPlanBanner(){
     if(warnEl){
       if(exceeded){
         const rec=planForCount(used);
-        warnEl.textContent=`⚠ Your store exceeds the current plan limit. New added or updated products will not display on storefront. Recommend upgrading to the ${PLANS[rec].name} plan.`;
+        const lim=PLAN_LIMITS[USER_PLAN];
+        warnEl.textContent=`⚠ Only the first ${lim.toLocaleString()} products will be displayed on your storefront. Upgrade to the ${PLANS[rec].name} plan to display your full catalog.`;
         warnEl.style.display='block';
       } else { warnEl.style.display='none'; }
     }
